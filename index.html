@@ -1,0 +1,3191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>AC-WAIS — SIIF 2026 Interactive Exhibition Simulator</title>
+  <style>
+    /* =========================================================================
+       AC-WAIS SIIF 2026 EXHIBITION SIMULATOR — 100% OFFLINE CSS3
+       Cross-Platform Responsive (Android, Windows, iPadOS, macOS)
+       ========================================================================= */
+    :root {
+      --bg: #edf3fa;
+      --card: #ffffff;
+      --subtle: #f1f5f9;
+      --border: #d5e0ee;
+      --border-strong: #b8c7dc;
+      --text: #0f172a;
+      --text-2: #334155;
+      --muted: #64748b;
+
+      --blue-50: #eff6ff;
+      --blue-100: #dbeafe;
+      --blue-500: #2563eb;
+      --blue-600: #1d4ed8;
+      --blue-700: #1e40af;
+
+      --cyan-50: #ecfeff;
+      --cyan-100: #cffafe;
+      --cyan-600: #0891b2;
+
+      --green-50: #ecfdf5;
+      --green-100: #d1fae5;
+      --green-500: #10b981;
+      --green-600: #059669;
+      --green-700: #047857;
+
+      --violet-50: #f5f3ff;
+      --violet-100: #ede9fe;
+      --violet-500: #8b5cf6;
+      --violet-600: #7c3aed;
+
+      --amber-50: #fffbeb;
+      --amber-100: #fef3c7;
+      --amber-500: #f59e0b;
+      --amber-600: #d97706;
+
+      --red-50: #fff1f2;
+      --red-100: #ffe4e6;
+      --red-600: #dc2626;
+
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 14px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 6px 18px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    button, input, select { font-family: inherit; touch-action: manipulation; }
+
+    /* CSS Kiosk Fallback for iPad / iOS Safari Fullscreen */
+    body.kiosk-mode .app-footer { display: none; }
+    body.kiosk-mode .app-main { padding-bottom: 8px; }
+
+    /* =========================================================================
+       1. COMPACT SINGLE-ROW FULL-WIDTH HEADER
+       ========================================================================= */
+    .top-header {
+      width: 100%;
+      background: linear-gradient(135deg, #ffffff 0%, #eff6ff 55%, #f5f3ff 100%);
+      border-bottom: 1.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+      padding: 7px max(12px, env(safe-area-inset-right)) 7px max(12px, env(safe-area-inset-left));
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1d4ed8 0%, #0891b2 56%, #7c3aed 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(29, 78, 216, 0.25);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .brand-title {
+      font-size: 1.12rem;
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pill-green {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--green-50);
+      border: 1px solid #a7f3d0;
+      color: var(--green-700);
+      font-size: 0.7rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #eef2f7;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 3px;
+    }
+
+    .tab-btn {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: var(--text-2);
+      font-size: 0.81rem;
+      font-weight: 800;
+      padding: 0 13px;
+      min-height: 44px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.14s ease;
+    }
+    .tab-btn:hover { background: rgba(255, 255, 255, 0.75); color: var(--text); }
+    .tab-btn.active {
+      background: #ffffff;
+      color: var(--blue-600);
+      box-shadow: 0 2px 7px rgba(37, 99, 235, 0.14);
+    }
+
+    .tab-num {
+      width: 19px;
+      height: 19px;
+      border-radius: 5px;
+      background: var(--border);
+      color: var(--text);
+      font-size: 0.69rem;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tab-btn.active .tab-num { background: var(--blue-600); color: #fff; }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .siif-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+      min-height: 40px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #fff;
+      font-size: 0.74rem;
+      font-weight: 800;
+      white-space: nowrap;
+      box-shadow: 0 3px 9px rgba(37, 99, 235, 0.22);
+    }
+
+    .siif-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 8px #34d399;
+      flex-shrink: 0;
+    }
+
+    .btn-fs {
+      appearance: none;
+      border: 1.5px solid var(--border-strong);
+      background: #ffffff;
+      color: var(--text);
+      font-size: 0.77rem;
+      font-weight: 800;
+      padding: 0 12px;
+      min-height: 44px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .btn-fs:hover { background: var(--blue-50); border-color: var(--blue-500); color: var(--blue-700); }
+
+    /* =========================================================================
+       2. FULL-WIDTH WORKSPACE & BADGES
+       ========================================================================= */
+    .app-main {
+      width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      padding: 10px max(12px, env(safe-area-inset-right)) 14px max(12px, env(safe-area-inset-left));
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeIn 0.15s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .toast-bar {
+      display: none;
+      margin-bottom: 9px;
+      padding: 8px 13px;
+      border-radius: 9px;
+      background: var(--blue-50);
+      border: 1px solid #93c5fd;
+      color: #1e3a8a;
+      font-size: 0.79rem;
+      font-weight: 700;
+    }
+    .toast-bar.show { display: block; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 0.67rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .b-blue { background: var(--blue-50); color: var(--blue-700); border: 1px solid var(--blue-100); }
+    .b-green { background: var(--green-50); color: var(--green-700); border: 1px solid var(--green-100); }
+    .b-violet { background: var(--violet-50); color: var(--violet-600); border: 1px solid var(--violet-100); }
+    .b-amber { background: var(--amber-50); color: var(--amber-600); border: 1px solid var(--amber-100); }
+    .b-red { background: var(--red-50); color: var(--red-600); border: 1px solid var(--red-100); }
+    .b-cyan { background: var(--cyan-50); color: var(--cyan-600); border: 1px solid var(--cyan-100); }
+    .b-slate { background: var(--subtle); color: var(--text-2); border: 1px solid var(--border); }
+
+    /* =========================================================================
+       3. EDGE-TO-EDGE CONTROL & SCENARIO BAR (ZERO EMPTY SPACE)
+       ========================================================================= */
+    .cmd-bar {
+      width: 100%;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 8px 9px;
+      margin-bottom: 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+      gap: 9px;
+      align-items: stretch;
+    }
+
+    .cmd-controls {
+      display: grid;
+      grid-template-columns: 1.32fr 0.66fr 1.35fr 1.08fr 1.05fr;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1.5px solid var(--border-strong);
+      background: #fff;
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0 10px;
+      min-height: 44px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.13s ease;
+    }
+    .btn:hover:not(:disabled) { background: var(--subtle); border-color: #94a3b8; }
+    .btn:active:not(:disabled) { transform: scale(0.985); }
+    .btn:disabled { opacity: 0.44; cursor: not-allowed; }
+
+    .btn-start {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff;
+      border-color: #047857;
+      box-shadow: 0 3px 10px rgba(16, 185, 129, 0.25);
+    }
+    .btn-start:hover:not(:disabled) { background: linear-gradient(135deg, #047857, #059669); }
+
+    .btn-stop {
+      background: linear-gradient(135deg, #e11d48, #dc2626);
+      color: #fff;
+      border-color: #b91c1c;
+      box-shadow: 0 3px 10px rgba(220, 38, 38, 0.25);
+    }
+    .btn-stop:hover:not(:disabled) { background: linear-gradient(135deg, #be123c, #b91c1c); }
+
+    .btn-drain {
+      background: linear-gradient(135deg, #0284c7, #0891b2);
+      color: #fff;
+      border-color: #0369a1;
+      box-shadow: 0 3px 9px rgba(2, 132, 199, 0.2);
+    }
+    .btn-drain:hover:not(:disabled) { background: linear-gradient(135deg, #0369a1, #0e7490); }
+
+    .btn-blue {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      border-color: #1e40af;
+    }
+
+    .seg-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--subtle);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 3px;
+      min-height: 44px;
+    }
+
+    .seg-btn {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0 6px;
+      min-height: 36px;
+      border-radius: 7px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .seg-btn.active {
+      background: #fff;
+      color: var(--blue-600);
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+    }
+
+    .loop-btn {
+      appearance: none;
+      border: 1.5px solid var(--border-strong);
+      background: #fff;
+      color: var(--text-2);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0 9px;
+      min-height: 44px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .loop-btn.active {
+      background: var(--violet-50);
+      border-color: var(--violet-500);
+      color: var(--violet-600);
+      box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.12);
+    }
+    .loop-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      flex-shrink: 0;
+    }
+    .loop-btn.active .loop-dot {
+      background: var(--violet-600);
+      box-shadow: 0 0 7px var(--violet-500);
+    }
+
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+      width: 100%;
+    }
+
+    .preset-card {
+      appearance: none;
+      border: 1.5px solid var(--border);
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 5px 8px;
+      min-height: 44px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      width: 100%;
+      transition: all 0.13s ease;
+    }
+    .preset-card:hover { border-color: var(--blue-500); background: var(--blue-50); }
+    .preset-card.active {
+      border-color: var(--blue-600);
+      background: var(--blue-50);
+      box-shadow: inset 0 0 0 1px var(--blue-600);
+    }
+    .preset-title {
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+    .preset-card.active .preset-title { color: var(--blue-700); }
+    .preset-sub {
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+    .preset-card.active .preset-sub { color: var(--blue-600); }
+
+    /* =========================================================================
+       4. TAB 1 MAIN 2-COLUMN WORKSPACE (3.2fr : 1fr)
+       ========================================================================= */
+    .sim-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 3.2fr) minmax(290px, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .stage-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-md);
+      padding: 9px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .svg-box {
+      width: 100%;
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef8ff 100%);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .sim-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .hit { cursor: pointer; }
+    .hit:hover { filter: drop-shadow(0 0 4px rgba(37, 99, 235, 0.35)); }
+
+    .legend-bar {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .leg-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 5px 7px;
+      border-radius: 8px;
+      background: var(--subtle);
+      border: 1px solid var(--border);
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--text-2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+    .inspector-bar {
+      width: 100%;
+      padding: 7px 11px;
+      border-radius: 9px;
+      background: var(--blue-50);
+      border: 1px solid var(--blue-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-2);
+    }
+    .inspector-bar strong { color: var(--blue-700); }
+
+    /* =========================================================================
+       5. RIGHT REAL-TIME TELEMETRY HUD (COMPACT, ZERO VERTICAL GAPS)
+       ========================================================================= */
+    .hud-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .hud-box {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow-sm);
+      padding: 9px 10px;
+    }
+
+    .phase-card {
+      border-radius: var(--r-md);
+      padding: 9px 11px;
+      border: 1.5px solid var(--border-strong);
+      background: #f8fafc;
+      transition: all 0.18s ease;
+    }
+    .phase-card.st-idle { background: #f8fafc; border-color: var(--border-strong); color: var(--text-2); }
+    .phase-card.st-uv { background: var(--violet-50); border-color: #c4b5fd; color: #4c1d95; }
+    .phase-card.st-check { background: var(--blue-50); border-color: #93c5fd; color: #1e3a8a; }
+    .phase-card.st-dose { background: var(--amber-50); border-color: #fcd34d; color: #92400e; }
+    .phase-card.st-ok { background: var(--green-50); border-color: #6ee7b7; color: #065f46; }
+    .phase-card.st-drain { background: var(--cyan-50); border-color: #67e8f9; color: #155e75; }
+    .phase-card.st-err { background: var(--red-50); border-color: #fda4af; color: #9f1239; }
+
+    .phase-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+    .phase-title { font-size: 0.76rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.02em; }
+    .phase-timer {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      white-space: nowrap;
+    }
+    .phase-msg { font-size: 0.73rem; font-weight: 600; line-height: 1.32; margin-bottom: 7px; }
+
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 3px;
+    }
+    .step-cell { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .step-bar { width: 100%; height: 5px; border-radius: 999px; background: rgba(100, 116, 139, 0.24); }
+    .step-cell.done .step-bar { background: var(--green-500); }
+    .step-cell.now .step-bar { background: var(--blue-600); box-shadow: 0 0 5px rgba(37, 99, 235, 0.5); }
+    .step-lbl { font-size: 0.59rem; font-weight: 800; opacity: 0.78; white-space: nowrap; }
+    .step-cell.now .step-lbl { opacity: 1; text-decoration: underline; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 7px 9px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 2px;
+    }
+    .kpi-top { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+    .kpi-lbl { font-size: 0.64rem; font-weight: 800; text-transform: uppercase; color: var(--muted); }
+    .kpi-val { font-family: var(--mono); font-size: 1.18rem; font-weight: 900; line-height: 1.15; }
+    .kpi-sub { font-size: 0.65rem; font-weight: 700; color: var(--muted); }
+    .bar-bg { height: 6px; border-radius: 999px; background: #e2e8f0; overflow: hidden; margin-top: 2px; }
+    .bar-fg { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #0ea5e9, #10b981); transition: width 0.1s linear; }
+
+    .tally-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .tally-card {
+      background: linear-gradient(180deg, #fff 0%, #ecfdf5 100%);
+      border: 1.5px solid #a7f3d0;
+      border-radius: 10px;
+      padding: 7px 5px;
+      text-align: center;
+    }
+    .tally-card.blue { background: linear-gradient(180deg, #fff 0%, #eff6ff 100%); border-color: #bfdbfe; }
+    .tally-card.cyan { background: linear-gradient(180deg, #fff 0%, #ecfeff 100%); border-color: #a5f3fc; }
+    .tally-val { font-family: var(--mono); font-size: 1.14rem; font-weight: 900; color: var(--green-700); line-height: 1.1; }
+    .tally-card.blue .tally-val { color: var(--blue-700); }
+    .tally-card.cyan .tally-val { color: var(--cyan-600); }
+    .tally-lbl { font-size: 0.61rem; font-weight: 800; text-transform: uppercase; color: var(--text-2); margin-top: 2px; }
+
+    .box-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .box-title { font-size: 0.69rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+
+    .relay-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5px;
+    }
+    .relay-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 7px;
+      border-radius: 8px;
+      background: var(--subtle);
+      border: 1px solid var(--border);
+      transition: all 0.14s ease;
+    }
+    .relay-pill.span-2 { grid-column: span 2; }
+    .relay-pill.on-p1 { background: var(--blue-50); border-color: #93c5fd; }
+    .relay-pill.on-p2 { background: var(--green-50); border-color: #6ee7b7; }
+    .relay-pill.on-uv { background: var(--violet-50); border-color: #c4b5fd; }
+    .relay-pill.on-mg { background: var(--amber-50); border-color: #fcd34d; }
+    .relay-pill.on-vlv { background: var(--cyan-50); border-color: #67e8f9; }
+
+    .led { width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1; border: 2px solid #94a3b8; flex-shrink: 0; }
+    .relay-pill.on-p1 .led { background: #2563eb; border-color: #93c5fd; box-shadow: 0 0 7px #3b82f6; }
+    .relay-pill.on-p2 .led { background: #059669; border-color: #6ee7b7; box-shadow: 0 0 7px #10b981; }
+    .relay-pill.on-uv .led { background: #7c3aed; border-color: #c4b5fd; box-shadow: 0 0 7px #8b5cf6; }
+    .relay-pill.on-mg .led { background: #d97706; border-color: #fcd34d; box-shadow: 0 0 7px #f59e0b; }
+    .relay-pill.on-vlv .led { background: #0891b2; border-color: #67e8f9; box-shadow: 0 0 7px #06b6d4; }
+    .r-name { font-size: 0.69rem; font-weight: 800; color: var(--text); line-height: 1.15; }
+    .r-st { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); }
+
+    .slider-row { margin-bottom: 4px; }
+    .slider-row:last-child { margin-bottom: 0; }
+    .slider-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.71rem;
+      font-weight: 800;
+      color: var(--text-2);
+    }
+    .slider-val {
+      font-family: var(--mono);
+      font-size: 0.71rem;
+      font-weight: 800;
+      color: var(--blue-700);
+      background: var(--blue-50);
+      padding: 1px 6px;
+      border-radius: 5px;
+    }
+    input[type="range"] { width: 100%; accent-color: #2563eb; cursor: pointer; height: 22px; margin: 0; }
+    input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* Collapsible Arduino UNO Firmware Drawer */
+    .drawer-wrap { margin-top: 10px; width: 100%; }
+    .btn-drawer {
+      width: 100%;
+      justify-content: space-between;
+      background: #fff;
+      border: 1.5px solid var(--border-strong);
+      color: var(--blue-700);
+      font-size: 0.8rem;
+      padding: 0 13px;
+      min-height: 44px;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-drawer:hover { background: var(--blue-50); border-color: var(--blue-500); }
+
+    .diag-drawer {
+      display: none;
+      margin-top: 8px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-md);
+      padding: 12px;
+    }
+    .diag-drawer.open { display: block; }
+
+    .diag-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.6fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .formula-box {
+      background: var(--subtle);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 0.74rem;
+    }
+    .formula-box code {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.69rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--blue-700);
+      padding: 5px 7px;
+      border-radius: 6px;
+      margin: 5px 0;
+      overflow-x: auto;
+    }
+    .kv {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      margin-top: 4px;
+      color: var(--text-2);
+    }
+    .serial-box {
+      background: #0f172a;
+      color: #e2e8f0;
+      border: 2px solid #334155;
+      border-radius: 10px;
+      font-family: var(--mono);
+      font-size: 0.71rem;
+      height: 165px;
+      overflow-y: auto;
+      padding: 8px 10px;
+      line-height: 1.45;
+    }
+    .sl-ts { color: #64748b; margin-right: 5px; }
+    .sl-info { color: #38bdf8; }
+    .sl-ok { color: #34d399; }
+    .sl-uv { color: #c4b5fd; }
+    .sl-warn { color: #fbbf24; }
+    .sl-err { color: #fb7185; }
+
+    /* =========================================================================
+       6. TAB 2 — LAB VERIFICATION & VIRTUAL ION BENCH
+       ========================================================================= */
+    .lab-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.03fr) minmax(0, 1.17fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .panel-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-md);
+      padding: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .panel-title { font-size: 0.98rem; font-weight: 900; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+    .panel-sub { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+    .tube-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .tube-card {
+      background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 9px 7px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.16s ease;
+    }
+    .tube-card.neg { border-color: #6ee7b7; background: linear-gradient(180deg, #fff 0%, #ecfdf5 100%); }
+    .tube-card.pos { border-color: #fbbf24; background: linear-gradient(180deg, #fff 0%, #fffbeb 100%); }
+    .tube-name { font-size: 0.82rem; font-weight: 900; }
+    .tube-reag { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+    .tube-svg { width: 70px; height: 118px; display: block; margin: 3px auto; }
+    .tube-res { font-size: 0.7rem; color: var(--text-2); min-height: 32px; margin-top: 5px; line-height: 1.28; }
+    .tube-eq {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--blue-700);
+      background: var(--blue-50);
+      padding: 3px 5px;
+      border-radius: 5px;
+      margin-top: 4px;
+      width: 100%;
+    }
+
+    .qual-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 7px;
+      margin-top: auto;
+    }
+    .qual-tile {
+      background: var(--subtle);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 8px 9px;
+    }
+    .qual-val { font-family: var(--mono); font-size: 0.95rem; font-weight: 900; color: var(--blue-700); margin: 2px 0; }
+
+    .filter-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .f-btn {
+      appearance: none;
+      border: 1.5px solid var(--border-strong);
+      background: #fff;
+      color: var(--text-2);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0 12px;
+      min-height: 40px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .f-btn.active { background: var(--blue-600); color: #fff; border-color: var(--blue-700); }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      flex: 1 1 auto;
+    }
+    .q-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
+    .q-table th {
+      background: var(--subtle);
+      color: var(--text-2);
+      font-weight: 800;
+      text-align: left;
+      padding: 8px 9px;
+      border-bottom: 1.5px solid var(--border);
+      white-space: nowrap;
+    }
+    .q-table td { padding: 7px 9px; border-bottom: 1px solid #e9eff7; vertical-align: middle; }
+    .q-table tr:last-child td { border-bottom: none; }
+    .q-table tr:hover td { background: #f8fbff; }
+    .q-val { font-family: var(--mono); font-weight: 800; }
+    .q-meth { font-family: var(--mono); font-size: 0.67rem; color: var(--muted); }
+
+    /* =========================================================================
+       7. TAB 3 — YIELD & GLOBAL IMPACT ESTIMATOR
+       ========================================================================= */
+    .yield-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 11px;
+    }
+    .y-kpi {
+      background: linear-gradient(135deg, #fff 0%, #eff6ff 100%);
+      border: 1.5px solid #bfdbfe;
+      border-radius: var(--r-md);
+      padding: 12px 13px;
+      box-shadow: var(--shadow-sm);
+    }
+    .y-kpi.violet { background: linear-gradient(135deg, #fff 0%, #f5f3ff 100%); border-color: #ddd6fe; }
+    .y-kpi.cyan { background: linear-gradient(135deg, #fff 0%, #ecfeff 100%); border-color: #a5f3fc; }
+    .y-kpi.green { background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%); border-color: #a7f3d0; }
+    .y-num { font-family: var(--mono); font-size: 1.48rem; font-weight: 900; color: var(--blue-700); margin: 3px 0 2px; }
+    .y-kpi.violet .y-num { color: var(--violet-600); }
+    .y-kpi.cyan .y-num { color: var(--cyan-600); }
+    .y-kpi.green .y-num { color: var(--green-700); }
+
+    .yield-grid {
+      display: grid;
+      grid-template-columns: minmax(310px, 0.92fr) minmax(0, 1.58fr);
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 11px;
+    }
+    .season-sel {
+      width: 100%;
+      padding: 9px 11px;
+      min-height: 44px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-strong);
+      background: #fff;
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .bench-box {
+      background: var(--subtle);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 11px;
+      font-size: 0.75rem;
+      color: var(--text-2);
+      line-height: 1.5;
+      margin-top: auto;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .impact-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-top: 4px solid var(--blue-500);
+      border-radius: var(--r-md);
+      padding: 11px;
+      box-shadow: var(--shadow-sm);
+    }
+    .impact-card.red { border-top-color: var(--red-600); }
+    .impact-card.amber { border-top-color: var(--amber-500); }
+    .impact-card.violet { border-top-color: var(--violet-500); }
+    .impact-card.green { border-top-color: var(--green-600); }
+    .impact-num { font-size: 1.28rem; font-weight: 900; margin: 2px 0 4px; }
+    .impact-txt { font-size: 0.73rem; color: var(--text-2); line-height: 1.4; }
+
+    .app-footer {
+      width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      padding: 9px max(12px, env(safe-area-inset-right)) 14px max(12px, env(safe-area-inset-left));
+      border-top: 1px solid var(--border);
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    /* =========================================================================
+       8. RESPONSIVE BREAKPOINTS (WINDOWS / MACOS / IPAD / ANDROID)
+       ========================================================================= */
+    @media (max-width: 1420px) {
+      .cmd-bar { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 1180px) {
+      .nav-tabs { order: 3; width: 100%; }
+      .tab-btn { flex: 1 1 0; justify-content: center; }
+      .sim-grid { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .relay-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .relay-pill.span-2 { grid-column: span 1; }
+      .diag-grid { grid-template-columns: 1fr; }
+      .lab-grid { grid-template-columns: 1fr; }
+      .yield-grid { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 800px) {
+      .cmd-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cmd-controls .btn-start,
+      .cmd-controls .btn-stop { grid-column: span 2; }
+      .preset-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .legend-bar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .relay-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .relay-pill.span-2 { grid-column: span 2; }
+      .tube-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .qual-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .yield-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .impact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 540px) {
+      .brand-sub, .siif-badge { display: none; }
+      .tab-btn { font-size: 0.74rem; padding: 0 7px; }
+      .legend-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .impact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- =========================================================================
+       COMPACT SINGLE-ROW FULL-WIDTH HEADER
+       ========================================================================= -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+            <path d="M9.5 14.5a3.5 3.5 0 0 0 5 0"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-row">
+            <h1 class="brand-title">AC-WAIS</h1>
+            <span class="pill-green">1.30 L / Cycle</span>
+          </div>
+          <p class="brand-sub">Air Condensate Water &mdash; Automated Integration System for Potable Water</p>
+        </div>
+      </div>
+
+      <nav class="nav-tabs" role="tablist" aria-label="Simulator Tabs">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="tab-sim">
+          <span class="tab-num">1</span> Live Simulator
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-lab">
+          <span class="tab-num">2</span> Lab &amp; Ion Bench
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-yield">
+          <span class="tab-num">3</span> Yield &amp; Impact
+        </button>
+      </nav>
+
+      <div class="header-right">
+        <span class="siif-badge"><span class="siif-dot"></span>SIIF 2026 &bull; SGS Makassar</span>
+        <button class="btn-fs" id="btn-fullscreen" type="button" title="Toggle Fullscreen / Booth Kiosk">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+          <span id="fs-label">Fullscreen</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div class="toast-bar" id="toast-bar" role="status"></div>
+
+    <!-- =======================================================================
+         TAB 1: LIVE INTERACTIVE EXHIBITION SIMULATOR
+         ======================================================================= -->
+    <section id="tab-sim" class="tab-panel active" role="tabpanel">
+      <!-- FULL-WIDTH BALANCED CONTROL & SCENARIO BAR -->
+      <div class="cmd-bar">
+        <div class="cmd-controls">
+          <button class="btn btn-start" id="btn-start-stop" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
+            START SYSTEM (Pin 2)
+          </button>
+
+          <button class="btn" id="btn-reset" type="button">Reset</button>
+
+          <div class="seg-group" role="group" aria-label="Simulation Speed">
+            <button class="seg-btn active" type="button" data-speed="1">1&times; Real (10s)</button>
+            <button class="seg-btn" type="button" data-speed="2.5">2.5&times; Expo Demo</button>
+          </div>
+
+          <button class="loop-btn active" id="btn-auto-loop" type="button" aria-pressed="true">
+            <span class="loop-dot"></span>
+            Auto-Loop: <span id="loop-txt">ON</span>
+          </button>
+
+          <button class="btn btn-drain" id="btn-drain" type="button" disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+            </svg>
+            Drain to Bottle
+          </button>
+        </div>
+
+        <div class="preset-grid" role="group" aria-label="Water Quality Scenarios">
+          <button class="preset-card active" type="button" data-preset="sgs">
+            <span class="preset-title">1. SGS Lab Sample</span>
+            <span class="preset-sub">pH 6.80 &bull; 17 ppm</span>
+          </button>
+          <button class="preset-card" type="button" data-preset="bblk">
+            <span class="preset-title">2. BB Labkesmas</span>
+            <span class="preset-sub">pH 7.20 &bull; 41.56 mg/L</span>
+          </button>
+          <button class="preset-card" type="button" data-preset="acidic">
+            <span class="preset-title">3. Acidic CO<sub>2</sub> Exposure</span>
+            <span class="preset-sub">pH 5.80 &bull; Mg(OH)<sub>2</sub> Dosing</span>
+          </button>
+          <button class="preset-card" type="button" data-preset="hightds">
+            <span class="preset-title">4. High TDS Alert</span>
+            <span class="preset-sub">pH 6.10 &bull; 540 ppm Lockout</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- MAIN 2-COLUMN WORKSPACE (3.2fr : 1fr) -->
+      <div class="sim-grid">
+        <!-- LEFT HERO: ENLARGED 1440x580 INTERACTIVE SVG -->
+        <div class="stage-card">
+          <div class="svg-box">
+            <svg id="acwais-svg" class="sim-svg" viewBox="0 0 1440 580" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="AC-WAIS Prototype Cutaway, 2.60 L Potable Reservoir, and Automatic Drinking Bottle Dispenser">
+              <defs>
+                <linearGradient id="g-raw" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#38bdf8" />
+                  <stop offset="100%" stop-color="#0284c7" />
+                </linearGradient>
+                <linearGradient id="g-potable" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#34d399" />
+                  <stop offset="55%" stop-color="#06b6d4" />
+                  <stop offset="100%" stop-color="#0284c7" />
+                </linearGradient>
+                <linearGradient id="g-ply" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#fef8ec" />
+                  <stop offset="100%" stop-color="#efe2c8" />
+                </linearGradient>
+                <linearGradient id="g-uv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ede9fe" />
+                  <stop offset="50%" stop-color="#e0e7ff" />
+                  <stop offset="100%" stop-color="#ede9fe" />
+                </linearGradient>
+                <linearGradient id="g-carbon" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#334155" />
+                  <stop offset="100%" stop-color="#1e293b" />
+                </linearGradient>
+                <linearGradient id="g-glass" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7" />
+                  <stop offset="22%" stop-color="#ffffff" stop-opacity="0.08" />
+                  <stop offset="82%" stop-color="#e0f2fe" stop-opacity="0.06" />
+                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.48" />
+                </linearGradient>
+                <linearGradient id="g-stream" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#34d399" />
+                  <stop offset="100%" stop-color="#06b6d4" />
+                </linearGradient>
+
+                <filter id="f-uv" x="-40%" y="-20%" width="180%" height="140%">
+                  <feGaussianBlur stdDeviation="4.5" result="b" />
+                  <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                </filter>
+                <filter id="f-led" x="-15%" y="-30%" width="130%" height="160%">
+                  <feGaussianBlur stdDeviation="1.6" result="b" />
+                  <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                </filter>
+
+                <pattern id="p-led" width="8" height="8" patternUnits="userSpaceOnUse">
+                  <circle cx="4" cy="4" r="1.4" fill="#2c1118" />
+                </pattern>
+                <pattern id="p-carbon" width="14" height="14" patternUnits="userSpaceOnUse">
+                  <circle cx="3" cy="4" r="1.8" fill="#475569" />
+                  <circle cx="10" cy="3" r="1.4" fill="#64748b" />
+                  <circle cx="7" cy="10" r="2.0" fill="#0f172a" />
+                  <circle cx="12" cy="11" r="1.3" fill="#475569" />
+                </pattern>
+
+                <!-- Precise Clip Paths -->
+                <clipPath id="clip-well">
+                  <rect x="58" y="216" width="122" height="128" rx="9" />
+                </clipPath>
+                <clipPath id="clip-layer2">
+                  <rect x="536" y="274" width="268" height="208" rx="7" />
+                </clipPath>
+                <clipPath id="clip-res">
+                  <rect x="976" y="116" width="176" height="352" rx="13" />
+                </clipPath>
+                <clipPath id="clip-bottle">
+                  <path d="M1297 294 L1331 294 L1333 314 C1357 326 1369 343 1369 368 L1369 506 C1369 514 1362 520 1353 520 L1275 520 C1266 520 1259 514 1259 506 L1259 368 C1259 343 1271 326 1295 314 Z" />
+                </clipPath>
+              </defs>
+
+              <!-- FLOOR STRIP -->
+              <rect x="0" y="550" width="1440" height="30" fill="#e2e8f0" />
+              <line x1="0" y1="550" x2="1440" y2="550" stroke="#cbd5e1" stroke-width="2" />
+              <text x="540" y="570" text-anchor="middle" font-size="12" font-weight="800" fill="#334155">Prototype: 35.5 cm W &times; 54.5 cm H &times; 50.0 cm L (Melamine Plywood, 4 Metal Corner Bars, 4 Detachable Casters)</text>
+              <text x="1196" y="570" text-anchor="middle" font-size="12" font-weight="800" fill="#047857">1.30 L / Cycle &rarr; 2.60 L Reservoir &rarr; Auto-Drain to Potable Bottle</text>
+
+              <!-- ===============================================================
+                   ZONE 1 (x=0..210): WALL + SPLIT AC + WELL + PUMP 1 (CH1)
+                   =============================================================== -->
+              <rect x="0" y="0" width="34" height="550" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1.5" />
+              <text x="17" y="275" text-anchor="middle" font-size="11" font-weight="800" fill="#475569" letter-spacing="1.6" transform="rotate(-90 17 275)">INTERIOR BUILDING WALL</text>
+
+              <!-- Split AC Unit -->
+              <g class="hit" data-info="ac">
+                <text x="119" y="26" text-anchor="middle" font-size="12" font-weight="900" fill="#1e293b">Split AC Evaporator</text>
+                <rect x="44" y="34" width="150" height="68" rx="11" fill="#f8fafc" stroke="#64748b" stroke-width="2.2" />
+                <rect x="55" y="44" width="128" height="14" rx="4" fill="#cbd5e1" />
+                <line x1="57" y1="84" x2="181" y2="84" stroke="#334155" stroke-width="3" stroke-linecap="round" />
+                <circle cx="172" cy="68" r="4.2" fill="#10b981" />
+                <rect x="34" y="48" width="10" height="7" fill="#94a3b8" />
+                <rect x="34" y="80" width="10" height="7" fill="#94a3b8" />
+              </g>
+
+              <!-- Drip Line -->
+              <rect x="114" y="102" width="10" height="112" fill="#dbeafe" stroke="#64748b" stroke-width="1.4" />
+              <g id="ac-drips">
+                <circle cx="119" cy="120" r="3.3" fill="#0284c7" />
+                <circle cx="119" cy="154" r="3.3" fill="#0284c7" />
+                <circle cx="119" cy="188" r="3.3" fill="#0284c7" />
+              </g>
+
+              <!-- Wall Collection Well -->
+              <g class="hit" data-info="well">
+                <rect x="34" y="240" width="22" height="7" fill="#94a3b8" />
+                <rect x="34" y="318" width="22" height="7" fill="#94a3b8" />
+                <rect x="48" y="184" width="142" height="23" rx="11.5" fill="#fff" stroke="#cbd5e1" stroke-width="1.3" />
+                <text x="119" y="199" text-anchor="middle" font-size="11" font-weight="800" fill="#0f172a">Wall Collection Well</text>
+
+                <rect x="56" y="214" width="126" height="132" rx="11" fill="#fff" stroke="#475569" stroke-width="2.4" />
+                <g clip-path="url(#clip-well)">
+                  <rect id="well-water" x="56" y="252" width="126" height="94" fill="url(#g-raw)" opacity="0.9" />
+                  <path id="well-wave" d="M56 252 Q88 247 119 252 T182 252 L182 262 L56 262 Z" fill="#7dd3fc" opacity="0.6" />
+                </g>
+                <rect x="56" y="214" width="126" height="132" rx="11" fill="none" stroke="#475569" stroke-width="2.4" />
+                <rect x="56" y="354" width="126" height="21" rx="10.5" fill="#fff" stroke="#cbd5e1" stroke-width="1.2" />
+                <text x="119" y="368" text-anchor="middle" font-size="10.5" font-weight="800" fill="#334155">Raw AC Condensate</text>
+              </g>
+
+              <!-- Pipe: Well -> Pump 1 -> Prototype -->
+              <path d="M119 346 L119 448 L244 448" fill="none" stroke="#94a3b8" stroke-width="13" stroke-linejoin="round" />
+              <path id="pipe-p1" d="M119 346 L119 448 L244 448" fill="none" stroke="#cbd5e1" stroke-width="8" stroke-linejoin="round" />
+
+              <!-- Pump 1 (Relay CH1) -->
+              <g class="hit" data-info="pump1">
+                <circle cx="174" cy="448" r="26" fill="#fff" stroke="#2563eb" stroke-width="3.2" />
+                <g id="pump1-rotor" transform="rotate(0 174 448)">
+                  <line x1="159" y1="448" x2="189" y2="448" stroke="#1d4ed8" stroke-width="4.2" stroke-linecap="round" />
+                  <line x1="174" y1="433" x2="174" y2="463" stroke="#1d4ed8" stroke-width="4.2" stroke-linecap="round" />
+                  <circle cx="174" cy="448" r="5.5" fill="#2563eb" />
+                </g>
+                <text x="174" y="492" text-anchor="middle" font-size="12" font-weight="900" fill="#0f172a">Pump 1 (CH1)</text>
+                <text x="174" y="507" text-anchor="middle" font-size="10.5" font-weight="700" fill="#64748b">10s Intake Fill</text>
+              </g>
+
+              <!-- ===============================================================
+                   ZONE 2 (x=225..855): AC-WAIS MELAMINE PLYWOOD PROTOTYPE
+                   =============================================================== -->
+              <g class="hit" data-info="enclosure">
+                <text x="540" y="23" text-anchor="middle" font-size="12" font-weight="800" fill="#1e293b">Hinged Maintenance Lid (3 Top Hinges + Salon Hinges) &bull; Melamine-Coated Plywood</text>
+                <rect x="228" y="31" width="624" height="13" rx="4" fill="#e7dcc4" stroke="#64748b" stroke-width="2" />
+                <!-- 3 Top Hinges -->
+                <rect x="304" y="28" width="20" height="7" rx="2" fill="#475569" />
+                <rect x="530" y="28" width="20" height="7" rx="2" fill="#475569" />
+                <rect x="756" y="28" width="20" height="7" rx="2" fill="#475569" />
+                <!-- Main Body -->
+                <rect x="235" y="44" width="610" height="480" rx="8" fill="url(#g-ply)" stroke="#64748b" stroke-width="2.6" />
+                <!-- 4 Metal Corner Support Bars -->
+                <rect x="235" y="44" width="11" height="480" fill="#64748b" />
+                <rect x="834" y="44" width="11" height="480" fill="#64748b" />
+                <!-- Interior Cutaway Backing -->
+                <rect x="252" y="126" width="576" height="386" rx="10" fill="#fff" stroke="#cbd5e1" stroke-width="1.5" />
+              </g>
+
+              <!-- 4 Detachable Casters -->
+              <g>
+                <rect x="276" y="524" width="15" height="8" fill="#64748b" />
+                <circle cx="283.5" cy="540" r="10" fill="#1e293b" />
+                <circle cx="283.5" cy="540" r="3.6" fill="#94a3b8" />
+
+                <rect x="352" y="524" width="15" height="8" fill="#64748b" />
+                <circle cx="359.5" cy="540" r="10" fill="#1e293b" />
+                <circle cx="359.5" cy="540" r="3.6" fill="#94a3b8" />
+
+                <rect x="713" y="524" width="15" height="8" fill="#64748b" />
+                <circle cx="720.5" cy="540" r="10" fill="#1e293b" />
+                <circle cx="720.5" cy="540" r="3.6" fill="#94a3b8" />
+
+                <rect x="789" y="524" width="15" height="8" fill="#64748b" />
+                <circle cx="796.5" cy="540" r="10" fill="#1e293b" />
+                <circle cx="796.5" cy="540" r="3.6" fill="#94a3b8" />
+              </g>
+
+              <!-- Arduino UNO Red Dot-Matrix LED Display -->
+              <g class="hit" data-info="led">
+                <text x="540" y="58" text-anchor="middle" font-size="10.5" font-weight="900" fill="#334155" letter-spacing="0.8">ARDUINO UNO LED MATRIX DISPLAY</text>
+                <rect x="280" y="63" width="520" height="54" rx="9" fill="#0f172a" stroke="#334155" stroke-width="3" />
+                <rect x="287" y="70" width="506" height="40" rx="5" fill="url(#p-led)" />
+                <text id="svg-led-text" x="540" y="97" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="20" font-weight="800" fill="#ff3b5c" letter-spacing="1.8" filter="url(#f-led)">READY - PRESS START</text>
+              </g>
+
+              <!-- UV-C COILED HOSE CHAMBER (x=260..494, y=135..502) -->
+              <g class="hit" data-info="uv">
+                <rect x="260" y="135" width="234" height="367" rx="12" fill="url(#g-uv)" stroke="#c4b5fd" stroke-width="1.8" />
+                <rect id="uv-aura" x="260" y="135" width="234" height="367" rx="12" fill="#8b5cf6" opacity="0" />
+                <text x="377" y="154" text-anchor="middle" font-size="12.5" font-weight="900" fill="#4c1d95">UV-C Coiled Hose Chamber</text>
+                <text x="377" y="170" text-anchor="middle" font-size="10.5" font-weight="800" fill="#6d28d9">4&times; 254 nm Germicidal Lamps (CH3)</text>
+
+                <!-- 4 UV-C Germicidal Lamps -->
+                <g id="uv-lamps">
+                  <rect class="uv-tube" x="270" y="186" width="11" height="140" rx="5.5" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1.4" />
+                  <rect class="uv-tube" x="270" y="344" width="11" height="144" rx="5.5" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1.4" />
+                  <rect class="uv-tube" x="473" y="186" width="11" height="140" rx="5.5" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1.4" />
+                  <rect class="uv-tube" x="473" y="344" width="11" height="144" rx="5.5" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1.4" />
+                </g>
+
+                <!-- UV Radiation Lines -->
+                <g id="uv-rays" opacity="0.16" stroke="#7c3aed" stroke-width="1.4" stroke-dasharray="5 6">
+                  <line x1="284" y1="226" x2="470" y2="226" />
+                  <line x1="284" y1="284" x2="470" y2="284" />
+                  <line x1="284" y1="342" x2="470" y2="342" />
+                  <line x1="284" y1="400" x2="470" y2="400" />
+                  <line x1="284" y1="458" x2="470" y2="458" />
+                </g>
+
+                <!-- Coiled Transparent Hose entering Layer 1 Carbon Filter cleanly -->
+                <path d="M244 448 L308 448 L446 448 C462 448 462 484 446 484 L310 484 C294 484 294 416 310 416 L446 416 C462 416 462 364 446 364 L310 364 C294 364 294 312 310 312 L446 312 C462 312 462 260 446 260 L310 260 C294 260 294 208 310 208 L508 208 L508 148 L560 148 L560 180" fill="none" stroke="#94a3b8" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+                <path id="uv-coil-path" d="M244 448 L308 448 L446 448 C462 448 462 484 446 484 L310 484 C294 484 294 416 310 416 L446 416 C462 416 462 364 446 364 L310 364 C294 364 294 312 310 312 L446 312 C462 312 462 260 446 260 L310 260 C294 260 294 208 310 208 L508 208 L508 148 L560 148 L560 180" fill="none" stroke="#dbeafe" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+
+                <!-- Microbe Particle Group -->
+                <g id="uv-particles"></g>
+              </g>
+
+              <!-- 11x11 cm ACRYLIC VIEWING WINDOW + DUAL-LAYER CONTAINER (x=520..822) -->
+              <!-- Clean Header Pill positioned safely to the right of bridge pipe x=560 -->
+              <rect x="588" y="135" width="224" height="24" rx="12" fill="#eff6ff" stroke="#38bdf8" stroke-width="1.5" />
+              <text x="700" y="151" text-anchor="middle" font-size="11" font-weight="900" fill="#0369a1">11 &times; 11 cm Acrylic Viewing Window</text>
+
+              <!-- Dashed Acrylic Frame -->
+              <rect x="522" y="168" width="296" height="330" rx="12" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="6 5" />
+              <!-- Inner Container -->
+              <rect x="532" y="178" width="276" height="308" rx="9" fill="#fff" stroke="#334155" stroke-width="2.4" />
+
+              <!-- LAYER 1: ACTIVATED CARBON FILTER -->
+              <g class="hit" data-info="carbon">
+                <rect x="536" y="182" width="268" height="84" rx="6" fill="url(#g-carbon)" />
+                <rect x="536" y="182" width="268" height="84" rx="6" fill="url(#p-carbon)" opacity="0.88" />
+                <rect x="548" y="191" width="244" height="22" rx="5" fill="#0f172a" fill-opacity="0.74" />
+                <text x="670" y="206" text-anchor="middle" font-size="11.5" font-weight="900" fill="#f8fafc">LAYER 1: Activated Carbon Filter</text>
+                <rect x="580" y="238" width="180" height="20" rx="5" fill="#0f172a" fill-opacity="0.7" />
+                <text x="670" y="252" text-anchor="middle" font-size="10.5" font-weight="800" fill="#93c5fd">Adsorbs VOCs &amp; TOCs</text>
+                <!-- VOC / TOC Adsorbed Particles -->
+                <g id="carbon-particles"></g>
+              </g>
+              <!-- Perforated Carbon Mesh Divider -->
+              <line x1="536" y1="268" x2="804" y2="268" stroke="#64748b" stroke-width="2.5" stroke-dasharray="6 4" />
+
+              <!-- LAYER 2: SENSOR & Mg(OH)2 DOSING CHAMBER -->
+              <g class="hit" data-info="sensors">
+                <g clip-path="url(#clip-layer2)">
+                  <rect id="l2-water" x="536" y="458" width="268" height="24" fill="url(#g-raw)" opacity="0.85" />
+                  <path id="l2-wave" d="M536 458 Q603 453 670 458 T804 458 L804 468 L536 468 Z" fill="#7dd3fc" opacity="0.55" />
+                  <!-- Mg(OH)2 Alkaline Droplets -->
+                  <g id="mg-drops"></g>
+                </g>
+
+                <!-- DFRobot Analog pH Probe -->
+                <rect x="564" y="280" width="14" height="24" rx="4" fill="#2563eb" />
+                <rect x="568" y="304" width="6" height="114" rx="2" fill="#e2e8f0" stroke="#475569" stroke-width="1.3" />
+                <circle cx="571" cy="422" r="7" fill="#60a5fa" stroke="#1d4ed8" stroke-width="1.8" />
+                <rect x="542" y="438" width="76" height="22" rx="6" fill="#fff" fill-opacity="0.95" stroke="#93c5fd" stroke-width="1.4" />
+                <text id="svg-ph-val" x="580" y="453" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11.5" font-weight="900" fill="#1d4ed8">pH 6.80</text>
+
+                <!-- Digital TDS Sensor Probe -->
+                <rect x="650" y="280" width="14" height="24" rx="4" fill="#0f172a" />
+                <line x1="654" y1="304" x2="654" y2="420" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" />
+                <line x1="660" y1="304" x2="660" y2="420" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" />
+                <rect x="624" y="438" width="76" height="22" rx="6" fill="#fff" fill-opacity="0.95" stroke="#94a3b8" stroke-width="1.4" />
+                <text id="svg-tds-val" x="662" y="453" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11.5" font-weight="900" fill="#0f172a">17 ppm</text>
+
+                <!-- Mg(OH)2 Alkaline Doser (CH4) -->
+                <g class="hit" data-info="doser">
+                  <rect id="doser-box" x="710" y="286" width="84" height="54" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" />
+                  <text x="752" y="307" text-anchor="middle" font-size="11.5" font-weight="900" fill="#92400e">Mg(OH)&#x2082;</text>
+                  <text x="752" y="324" text-anchor="middle" font-size="10" font-weight="800" fill="#b45309">CH4 Doser</text>
+                  <polygon points="745,340 759,340 752,354" fill="#d97706" />
+                </g>
+
+                <text x="670" y="510" text-anchor="middle" font-size="11.5" font-weight="900" fill="#1e293b">LAYER 2: pH &amp; TDS Quality Confirmation</text>
+              </g>
+
+              <!-- ===============================================================
+                   ZONE 3 (x=855..965): PUMP 2 (CH2) TRANSFER LINE
+                   =============================================================== -->
+              <path d="M808 448 L912 448 L912 100 L1064 100 L1064 114" fill="none" stroke="#94a3b8" stroke-width="13" stroke-linejoin="round" />
+              <path id="pipe-p2" d="M808 448 L912 448 L912 100 L1064 100 L1064 114" fill="none" stroke="#cbd5e1" stroke-width="8" stroke-linejoin="round" />
+
+              <g class="hit" data-info="pump2">
+                <circle cx="912" cy="448" r="26" fill="#fff" stroke="#059669" stroke-width="3.2" />
+                <g id="pump2-rotor" transform="rotate(0 912 448)">
+                  <line x1="897" y1="448" x2="927" y2="448" stroke="#047857" stroke-width="4.2" stroke-linecap="round" />
+                  <line x1="912" y1="433" x2="912" y2="463" stroke="#047857" stroke-width="4.2" stroke-linecap="round" />
+                  <circle cx="912" cy="448" r="5.5" fill="#059669" />
+                </g>
+                <text x="912" y="492" text-anchor="middle" font-size="12" font-weight="900" fill="#065f46">Pump 2 (CH2)</text>
+                <text x="912" y="507" text-anchor="middle" font-size="10.5" font-weight="700" fill="#059669">1.30 L / Cycle</text>
+              </g>
+
+              <!-- ===============================================================
+                   ZONE 4 (x=968..1190): ENLARGED POTABLE WATER RESERVOIR (2.60 L)
+                   =============================================================== -->
+              <g class="hit" data-info="reservoir">
+                <rect x="978" y="60" width="172" height="26" rx="13" fill="#ecfdf5" stroke="#10b981" stroke-width="1.6" />
+                <text x="1064" y="77" text-anchor="middle" font-size="11.5" font-weight="900" fill="#047857">Potable Reservoir (2.60 L)</text>
+
+                <!-- Tank Outer Shell -->
+                <rect x="974" y="114" width="180" height="356" rx="15" fill="#ffffff" stroke="#059669" stroke-width="3.2" />
+
+                <!-- Animated Water Fill (Clipped) -->
+                <g clip-path="url(#clip-res)">
+                  <rect id="res-water" x="974" y="468" width="180" height="2" fill="url(#g-potable)" opacity="0.9" />
+                  <path id="res-wave" d="M974 468 Q1019 462 1064 468 T1154 468 L1154 478 L974 478 Z" fill="#6ee7b7" opacity="0.7" />
+                </g>
+
+                <!-- Glass Reflection -->
+                <rect x="974" y="114" width="180" height="356" rx="15" fill="url(#g-glass)" pointer-events="none" />
+                <rect x="974" y="114" width="180" height="356" rx="15" fill="none" stroke="#059669" stroke-width="3.2" />
+
+                <!-- Graduation Scale Ticks (0.00 L to 2.60 L) -->
+                <g font-family="ui-monospace, monospace" font-size="10" font-weight="800" fill="#334155">
+                  <!-- 2.60 L FULL (y=130) -->
+                  <line x1="1138" y1="130" x2="1154" y2="130" stroke="#047857" stroke-width="2" />
+                  <text x="1133" y="134" text-anchor="end" fill="#047857">2.60 L FULL</text>
+                  <!-- 1.95 L (y=214) -->
+                  <line x1="1142" y1="214" x2="1154" y2="214" stroke="#64748b" stroke-width="1.6" />
+                  <text x="1137" y="218" text-anchor="end">1.95 L</text>
+                  <!-- 1.30 L (1 Cycle) (y=298) -->
+                  <line x1="1136" y1="298" x2="1154" y2="298" stroke="#0284c7" stroke-width="2" />
+                  <line x1="976" y1="298" x2="1134" y2="298" stroke="#0284c7" stroke-width="1" stroke-dasharray="4 4" opacity="0.45" />
+                  <text x="1131" y="294" text-anchor="end" fill="#0369a1">1.30 L (1 Cyc)</text>
+                  <!-- 0.65 L (y=382) -->
+                  <line x1="1142" y1="382" x2="1154" y2="382" stroke="#64748b" stroke-width="1.6" />
+                  <text x="1137" y="386" text-anchor="end">0.65 L</text>
+                  <!-- 0.00 L (y=464) -->
+                  <line x1="1142" y1="464" x2="1154" y2="464" stroke="#64748b" stroke-width="1.6" />
+                  <text x="1137" y="463" text-anchor="end">0.00 L</text>
+                </g>
+
+                <!-- Prominent Center Digital Volume Pill -->
+                <rect x="992" y="242" width="144" height="50" rx="10" fill="#ffffff" fill-opacity="0.93" stroke="#a7f3d0" stroke-width="1.6" />
+                <text id="svg-res-val" x="1064" y="266" text-anchor="middle" font-family="ui-monospace, monospace" font-size="19" font-weight="900" fill="#0f172a">0.00 L</text>
+                <text id="svg-res-sub" x="1064" y="284" text-anchor="middle" font-size="10.5" font-weight="800" fill="#059669">0 / 2 Cycles (2.60 L)</text>
+
+                <!-- Tank Stand / Support -->
+                <rect x="984" y="470" width="160" height="12" rx="4" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5" />
+                <text x="1064" y="505" text-anchor="middle" font-size="11.5" font-weight="900" fill="#047857">WHO Drinking Standard</text>
+                <text x="1064" y="521" text-anchor="middle" font-size="10" font-weight="700" fill="#64748b">Auto-Drains at 2.60 L</text>
+              </g>
+
+              <!-- ===============================================================
+                   ZONE 5 (x=1190..1430): AUTO-DRAIN VALVE & DRINKING BOTTLE
+                   =============================================================== -->
+              <!-- Dispense Manifold Pipe from Bottom-Right of Reservoir to Tap above Bottle -->
+              <path d="M1154 440 L1212 440 L1212 246 L1314 246 L1314 278" fill="none" stroke="#94a3b8" stroke-width="12" stroke-linejoin="round" />
+              <path id="pipe-drain" d="M1154 440 L1212 440 L1212 246 L1314 246 L1314 278" fill="none" stroke="#cbd5e1" stroke-width="7" stroke-linejoin="round" />
+
+              <!-- Automated Solenoid Dispense Valve -->
+              <g class="hit" data-info="valve">
+                <rect id="valve-body" x="1238" y="226" width="52" height="40" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="2.2" />
+                <circle id="valve-led" cx="1264" cy="240" r="5" fill="#94a3b8" />
+                <text id="valve-txt" x="1264" y="259" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9.5" font-weight="900" fill="#475569">CLOSED</text>
+                <text x="1264" y="216" text-anchor="middle" font-size="10.5" font-weight="900" fill="#0e7490">Auto-Drain Valve</text>
+                <!-- Dispense Nozzle -->
+                <rect x="1306" y="274" width="16" height="10" rx="3" fill="#475569" />
+              </g>
+
+              <!-- Animated Pouring Water Stream into Bottle -->
+              <g id="drain-stream-group" opacity="0">
+                <rect id="drain-stream" x="1310.5" y="284" width="7" height="234" rx="3" fill="url(#g-stream)" />
+                <ellipse id="drain-splash" cx="1314" cy="516" rx="18" ry="4" fill="#6ee7b7" opacity="0.8" />
+              </g>
+
+              <!-- POTABLE DRINKING BOTTLE (2.60 L Ready-to-Consume) -->
+              <g class="hit" data-info="bottle">
+                <!-- Title Pill -->
+                <rect x="1220" y="138" width="194" height="26" rx="13" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.6" />
+                <text x="1317" y="155" text-anchor="middle" font-size="11.5" font-weight="900" fill="#0e7490">Potable Drinking Bottle</text>
+
+                <!-- Bottle Rim / Open Neck -->
+                <rect x="1293" y="286" width="42" height="9" rx="3" fill="#e2e8f0" stroke="#0e7490" stroke-width="2" />
+
+                <!-- Bottle Body Background -->
+                <path d="M1297 294 L1331 294 L1333 314 C1357 326 1369 343 1369 368 L1369 506 C1369 514 1362 520 1353 520 L1275 520 C1266 520 1259 514 1259 506 L1259 368 C1259 343 1271 326 1295 314 Z" fill="#ffffff" stroke="#0891b2" stroke-width="2.8" />
+
+                <!-- Animated Bottle Water Fill (Clipped) -->
+                <g clip-path="url(#clip-bottle)">
+                  <rect id="bottle-water" x="1256" y="520" width="116" height="0" fill="url(#g-potable)" opacity="0.92" />
+                  <path id="bottle-wave" d="M1256 520 Q1285 516 1314 520 T1372 520 L1372 528 L1256 528 Z" fill="#a7f3d0" opacity="0.75" />
+                </g>
+
+                <!-- Glossy Bottle Highlight + Outline -->
+                <path d="M1297 294 L1331 294 L1333 314 C1357 326 1369 343 1369 368 L1369 506 C1369 514 1362 520 1353 520 L1275 520 C1266 520 1259 514 1259 506 L1259 368 C1259 343 1271 326 1295 314 Z" fill="url(#g-glass)" pointer-events="none" />
+                <path d="M1297 294 L1331 294 L1333 314 C1357 326 1369 343 1369 368 L1369 506 C1369 514 1362 520 1353 520 L1275 520 C1266 520 1259 514 1259 506 L1259 368 C1259 343 1271 326 1295 314 Z" fill="none" stroke="#0891b2" stroke-width="2.8" />
+
+                <!-- Bottle Label Plate -->
+                <rect x="1267" y="388" width="94" height="58" rx="8" fill="#ffffff" fill-opacity="0.94" stroke="#bae6fd" stroke-width="1.5" />
+                <text x="1314" y="405" text-anchor="middle" font-size="9.5" font-weight="900" fill="#0369a1">AC-WAIS POTABLE</text>
+                <text id="svg-bottle-val" x="1314" y="425" text-anchor="middle" font-family="ui-monospace, monospace" font-size="14" font-weight="900" fill="#0f172a">0.00 L</text>
+                <text id="svg-bottle-pct" x="1314" y="439" text-anchor="middle" font-size="9.5" font-weight="800" fill="#64748b">Waiting Fill</text>
+
+                <!-- Glowing Green "READY TO CONSUME" Stamp -->
+                <g id="bottle-ready-badge" opacity="0">
+                  <rect x="1220" y="328" width="188" height="36" rx="18" fill="#059669" stroke="#d1fae5" stroke-width="2.4" />
+                  <text x="1314" y="351" text-anchor="middle" font-size="12" font-weight="900" fill="#ffffff" letter-spacing="0.4">READY TO CONSUME &#x2713;</text>
+                </g>
+
+                <!-- Dispensing Tray -->
+                <rect x="1234" y="520" width="160" height="14" rx="5" fill="#94a3b8" stroke="#64748b" stroke-width="1.5" />
+                <text x="1314" y="546" text-anchor="middle" font-size="10.5" font-weight="800" fill="#334155">2.60 L Dispensing Tray</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- CLEAN HORIZONTAL LEGEND STRIP -->
+          <div class="legend-bar">
+            <div class="leg-item"><span class="leg-dot" style="background:#f97316"></span>Active Microbe</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#38bdf8"></span>UV-Inactivated</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#92400e"></span>VOC / TOC Carbon</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#fff;border:2px solid #f59e0b"></span>Mg(OH)<sub>2</sub> Doser</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#10b981"></span>Potable (1.30 L/Cyc)</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#0891b2"></span>Auto-Drain Bottle</div>
+          </div>
+
+          <!-- COMPONENT INSPECTOR STRIP -->
+          <div class="inspector-bar" id="inspector-bar">
+            <span><strong>Interactive Booth Tip:</strong> Tap any component on the prototype to inspect engineering specifications from the SGS Makassar research paper.</span>
+            <span class="badge b-blue">Arduino UNO</span>
+          </div>
+        </div>
+
+        <!-- RIGHT REAL-TIME TELEMETRY HUD (ZERO GAPS) -->
+        <aside class="hud-col" aria-label="Real-Time Telemetry">
+          <!-- 1. Live Status Banner + 6-Step Progress -->
+          <div class="phase-card st-idle" id="phase-card">
+            <div class="phase-head">
+              <span class="phase-title" id="phase-title">IDLE &mdash; STANDBY</span>
+              <span class="phase-timer" id="phase-timer">0.0 s</span>
+            </div>
+            <p class="phase-msg" id="phase-msg">Press <strong>START SYSTEM (Pin 2)</strong> to run automated UV-C disinfection, Carbon filtration, pH/TDS confirmation, 2.60 L filling, and bottle dispensing.</p>
+            <div class="steps-row" id="steps-row">
+              <div class="step-cell" data-step="1"><span class="step-bar"></span><span class="step-lbl">1.UV</span></div>
+              <div class="step-cell" data-step="2"><span class="step-bar"></span><span class="step-lbl">2.Carbon</span></div>
+              <div class="step-cell" data-step="3"><span class="step-bar"></span><span class="step-lbl">3.pH/TDS</span></div>
+              <div class="step-cell" data-step="4"><span class="step-bar"></span><span class="step-lbl">4.Pump2</span></div>
+              <div class="step-cell" data-step="5"><span class="step-bar"></span><span class="step-lbl">5.2.60L</span></div>
+              <div class="step-cell" data-step="6"><span class="step-bar"></span><span class="step-lbl">6.Bottle</span></div>
+            </div>
+          </div>
+
+          <!-- 2. 2x2 Real-Time Metric Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-lbl">Live pH</span>
+                <span class="badge b-green" id="badge-ph">6.5&ndash;7.5 OK</span>
+              </div>
+              <div class="kpi-val" id="hud-ph">6.80</div>
+              <div class="kpi-sub">DFRobot PH4502C</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-lbl">Live TDS</span>
+                <span class="badge b-green" id="badge-tds">&lt;500 OK</span>
+              </div>
+              <div class="kpi-val" id="hud-tds">17 ppm</div>
+              <div class="kpi-sub">WHO / EPA Limit</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-lbl">Active Cycle</span>
+                <span class="badge b-blue">1.30 L Max</span>
+              </div>
+              <div class="kpi-val" id="hud-cycle">0.00 / 1.30 L</div>
+              <div class="bar-bg"><div class="bar-fg" id="bar-cycle" style="width:0%"></div></div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-lbl">Reservoir</span>
+                <span class="badge b-cyan" id="badge-res">2.60 L Cap</span>
+              </div>
+              <div class="kpi-val" id="hud-res">0.00 / 2.60 L</div>
+              <div class="bar-bg"><div class="bar-fg" id="bar-res" style="width:0%"></div></div>
+            </div>
+          </div>
+
+          <!-- 3. Production Counter Strip -->
+          <div class="tally-grid">
+            <div class="tally-card">
+              <div class="tally-val" id="cnt-bottles">0</div>
+              <div class="tally-lbl">Bottles Ready</div>
+            </div>
+            <div class="tally-card blue">
+              <div class="tally-val" id="cnt-cycles">0</div>
+              <div class="tally-lbl">Cycles Done</div>
+            </div>
+            <div class="tally-card cyan">
+              <div class="tally-val" id="cnt-liters">0.00 L</div>
+              <div class="tally-lbl">Total Yield</div>
+            </div>
+          </div>
+
+          <!-- 4. 5 Real-Time Relay & Valve Pills -->
+          <div class="hud-box">
+            <div class="box-head">
+              <span class="box-title">Relays &amp; Auto-Drain Valve</span>
+              <span class="badge b-slate">5-Ch I/O</span>
+            </div>
+            <div class="relay-grid">
+              <div class="relay-pill" id="rel-p1">
+                <span class="led"></span>
+                <div><div class="r-name">CH1 Pump 1</div><div class="r-st">LOW</div></div>
+              </div>
+              <div class="relay-pill" id="rel-p2">
+                <span class="led"></span>
+                <div><div class="r-name">CH2 Pump 2</div><div class="r-st">LOW</div></div>
+              </div>
+              <div class="relay-pill" id="rel-uv">
+                <span class="led"></span>
+                <div><div class="r-name">CH3 4&times; UV-C</div><div class="r-st">LOW</div></div>
+              </div>
+              <div class="relay-pill" id="rel-mg">
+                <span class="led"></span>
+                <div><div class="r-name">CH4 Mg(OH)<sub>2</sub></div><div class="r-st">LOW</div></div>
+              </div>
+              <div class="relay-pill span-2" id="rel-vlv">
+                <span class="led"></span>
+                <div><div class="r-name">Auto-Drain Solenoid Valve &rarr; Potable Bottle</div><div class="r-st">CLOSED</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Raw Condensate Calibration Sliders -->
+          <div class="hud-box">
+            <div class="box-head">
+              <span class="box-title">Raw Condensate Input</span>
+              <span class="badge b-blue">Live Sensor Sim</span>
+            </div>
+            <div class="slider-row">
+              <div class="slider-top">
+                <label for="sl-ph">Raw Condensate pH</label>
+                <span class="slider-val" id="val-sl-ph">6.80</span>
+              </div>
+              <input type="range" id="sl-ph" min="4.5" max="9.0" step="0.05" value="6.80" />
+            </div>
+            <div class="slider-row">
+              <div class="slider-top">
+                <label for="sl-tds">Raw Condensate TDS</label>
+                <span class="slider-val" id="val-sl-tds">17 ppm</span>
+              </div>
+              <input type="range" id="sl-tds" min="0" max="700" step="1" value="17" />
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- COLLAPSIBLE FULL-WIDTH ARDUINO UNO DIAGNOSTICS DRAWER -->
+      <div class="drawer-wrap">
+        <button class="btn btn-drawer" id="btn-drawer" type="button" aria-expanded="false">
+          <span><strong>Arduino UNO Firmware Diagnostics &amp; Serial Monitor</strong> &mdash; Live PH4502C Voltage/ADC &amp; TDS Mapping</span>
+          <span id="drawer-chevron">&#x25BC; Expand</span>
+        </button>
+
+        <div class="diag-drawer" id="diag-drawer">
+          <div class="box-head">
+            <span class="box-title">Real-Time Microcontroller Telemetry (9600 Baud &bull; 10-Bit ADC)</span>
+            <button class="btn" id="btn-clear-log" type="button" style="min-height:34px;font-size:0.72rem;padding:0 10px;">Clear Serial Log</button>
+          </div>
+          <div class="diag-grid">
+            <div class="formula-box">
+              <strong>DFRobot PH4502C Analog Conversion</strong>
+              <code>float V = raw * (5.0 / 1023.0);
+float pH = 7.0 + ((2.5 - V) / 0.18);</code>
+              <div class="kv"><span>analogRead(pHPin):</span><strong id="adc-ph-raw">519</strong></div>
+              <div class="kv"><span>Sensor Voltage (V):</span><strong id="adc-ph-v">2.536 V</strong></div>
+              <div class="kv"><span>Computed pH:</span><strong id="adc-ph-out">6.80</strong></div>
+            </div>
+
+            <div class="formula-box">
+              <strong>Analog TDS Sensor Linear Mapping</strong>
+              <code>int raw = analogRead(tdsPin);
+float tds = map(raw, 0, 1023, 0, 1000);</code>
+              <div class="kv"><span>analogRead(tdsPin):</span><strong id="adc-tds-raw">17</strong></div>
+              <div class="kv"><span>Mapped TDS (ppm):</span><strong id="adc-tds-out">17 ppm</strong></div>
+              <div class="kv"><span>State Machine:</span><strong id="adc-state">IDLE</strong></div>
+            </div>
+
+            <div>
+              <div class="serial-box" id="serial-box" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TAB 2: LAB VERIFICATION & VIRTUAL ION BENCH
+         ======================================================================= -->
+    <section id="tab-lab" class="tab-panel" role="tabpanel">
+      <div class="lab-grid">
+        <!-- LEFT: SGS MAKASSAR QUALITATIVE ION BENCH -->
+        <div class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Qualitative Ion Bench <span class="badge b-blue">SGS Makassar Lab</span></h2>
+              <p class="panel-sub">Drop analytical reagents into AC condensate samples to test for dissolved metal ions and mineral salts.</p>
+            </div>
+            <div class="seg-group" style="min-width:250px;">
+              <button class="seg-btn active" type="button" data-ionmode="actual">Actual AC Condensate</button>
+              <button class="seg-btn" type="button" data-ionmode="positive">Positive Control</button>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:7px;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+            <span class="badge b-green" id="ion-mode-pill">Mode: Actual AC Condensate (Zero Metal Ions Detected)</span>
+            <div style="display:flex;gap:6px;">
+              <button class="btn btn-blue" id="btn-test-all" type="button" style="min-height:38px;">Test All 6 Tubes</button>
+              <button class="btn" id="btn-reset-tubes" type="button" style="min-height:38px;">Reset Bench</button>
+            </div>
+          </div>
+
+          <div class="tube-grid" id="tube-grid"></div>
+
+          <!-- SGS Physicochemical Summary Strip -->
+          <div class="qual-grid">
+            <div class="qual-tile">
+              <div class="kpi-lbl">HANNA pH Meter</div>
+              <div class="qual-val">6.5&ndash;7.5</div>
+              <div class="kpi-sub">Sample: pH 6.80</div>
+            </div>
+            <div class="qual-tile">
+              <div class="kpi-lbl">Universal Paper</div>
+              <div class="qual-val">6.0&ndash;7.0</div>
+              <div class="kpi-sub">Near-neutral color</div>
+            </div>
+            <div class="qual-tile">
+              <div class="kpi-lbl">Digital TDS Probe</div>
+              <div class="qual-val">17 ppm</div>
+              <div class="kpi-sub">Well below 500 ppm</div>
+            </div>
+            <div class="qual-tile">
+              <div class="kpi-lbl">UV-C 254 nm (10s)</div>
+              <div class="qual-val">98.3%</div>
+              <div class="kpi-sub">E. coli inactivation</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: BB LABKESMAS MAKASSAR QUANTITATIVE RESULTS -->
+        <div class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Quantitative Lab Report <span class="badge b-green">BB Labkesmas Makassar</span></h2>
+              <p class="panel-sub">Accredited government laboratory evaluation across all 17 physical, chemical, and microbiological criteria.</p>
+            </div>
+            <span class="badge b-green">WHO &amp; Permenkes Compliant</span>
+          </div>
+
+          <div class="filter-row" id="lab-filters">
+            <button class="f-btn active" type="button" data-cat="all">All (17)</button>
+            <button class="f-btn" type="button" data-cat="physical">Physical (4)</button>
+            <button class="f-btn" type="button" data-cat="chemical">Chemical (9)</button>
+            <button class="f-btn" type="button" data-cat="micro">Microbiological (4)</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="q-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Category</th>
+                  <th>Result</th>
+                  <th>Max Limit</th>
+                  <th>Method</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="quant-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TAB 3: YIELD & GLOBAL IMPACT ESTIMATOR
+         ======================================================================= -->
+    <section id="tab-yield" class="tab-panel" role="tabpanel">
+      <!-- TOP 4 KPI CARDS -->
+      <div class="yield-kpis">
+        <div class="y-kpi">
+          <div class="kpi-lbl">Daily Potable Water</div>
+          <div class="y-num" id="y-daily">55.65 L/day</div>
+          <div class="kpi-sub" id="y-daily-sub">1 AC Unit &bull; 7 h/day &bull; August Peak</div>
+        </div>
+        <div class="y-kpi violet">
+          <div class="kpi-lbl">AC-WAIS Cycles / Day</div>
+          <div class="y-num" id="y-cycles">42.8 cycles</div>
+          <div class="kpi-sub">At 1.30 L potable output per cycle</div>
+        </div>
+        <div class="y-kpi cyan">
+          <div class="kpi-lbl">2.60 L Drinking Bottles / Day</div>
+          <div class="y-num" id="y-bottles">21.4 bottles</div>
+          <div class="kpi-sub">2 cycles per full 2.60 L auto-drained bottle</div>
+        </div>
+        <div class="y-kpi green">
+          <div class="kpi-lbl">People Supplied / Day</div>
+          <div class="y-num" id="y-people">21 people</div>
+          <div class="kpi-sub">Basis: 2.60 L drinking water / person / day</div>
+        </div>
+      </div>
+
+      <!-- MIDDLE 2-COLUMN ESTIMATOR & SEASONAL BAR CHART -->
+      <div class="yield-grid">
+        <div class="panel-card">
+          <div>
+            <h2 class="panel-title">Scalable Yield Calculator</h2>
+            <p class="panel-sub">Calibrated to the paper&rsquo;s New Damietta institutional study (Figure 2, 09:00&ndash;16:00 baseline).</p>
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-top">
+              <label for="sl-units">Number of AC Units</label>
+              <span class="slider-val" id="val-units">1 unit</span>
+            </div>
+            <input type="range" id="sl-units" min="1" max="200" step="1" value="1" />
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+            <button class="btn" type="button" data-units="1" style="min-height:38px;font-size:0.74rem;">1 Home AC</button>
+            <button class="btn" type="button" data-units="20" style="min-height:38px;font-size:0.74rem;">20 Classrooms</button>
+            <button class="btn btn-blue" type="button" data-units="113" style="min-height:38px;font-size:0.74rem;">113 Benchmark</button>
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-top">
+              <label for="sl-hours">Operating Hours / Day</label>
+              <span class="slider-val" id="val-hours">7 h/day</span>
+            </div>
+            <input type="range" id="sl-hours" min="1" max="24" step="1" value="7" />
+          </div>
+
+          <div>
+            <label for="sel-season" class="kpi-lbl" style="display:block;margin-bottom:4px;">Climate / Seasonal Benchmark (Fig. 2)</label>
+            <select id="sel-season" class="season-sel">
+              <option value="51.24">June &mdash; Warm Humid (51.24 L / 7h baseline)</option>
+              <option value="51.56">July &mdash; Summer Humid (51.56 L / 7h baseline)</option>
+              <option value="55.65" selected>August &mdash; Peak Temp &amp; Humidity (55.65 L / 7h baseline)</option>
+              <option value="44.53">December &mdash; Cooler Season (44.53 L / 7h baseline)</option>
+            </select>
+          </div>
+
+          <div class="bench-box">
+            <strong>Paper Institutional Reference (Elbrashy et al., 2025):</strong><br />
+            113 monitored AC units generated an average of <strong>5,977.7 L/day</strong> (~52.90 L/unit/day across 7 daytime hours). With AC-WAIS, that equals <strong>4,598 cycles/day</strong> or <strong>2,299 ready-to-consume 2.60 L potable bottles</strong> daily.
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Seasonal Condensate Recovery Chart</h2>
+              <p class="panel-sub">Projected daily potable water yield (L/day) across all 4 empirical seasonal baselines for your current setup.</p>
+            </div>
+            <span class="badge b-blue" id="chart-badge">1 Unit &bull; 7 h/day</span>
+          </div>
+          <div style="flex:1 1 auto;display:flex;align-items:center;">
+            <svg id="yield-chart" viewBox="0 0 680 300" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Seasonal Condensate Yield Bar Chart"></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM 5 GLOBAL WATER SCARCITY IMPACT CARDS -->
+      <div class="impact-grid">
+        <div class="impact-card red">
+          <span class="badge b-red">UN Water 2026</span>
+          <div class="impact-num">2.1 Billion</div>
+          <p class="impact-txt">People still lack safely managed drinking water, with 106 million drinking directly from untreated surface sources.</p>
+        </div>
+        <div class="impact-card amber">
+          <span class="badge b-amber">UNICEF / WRI</span>
+          <div class="impact-num">4 Billion</div>
+          <p class="impact-txt">At least 50% of humanity lives under high water stress at least one month per year; 436M children face high vulnerability.</p>
+        </div>
+        <div class="impact-card red">
+          <span class="badge b-red">Regional Crisis</span>
+          <div class="impact-num">83% / 74%</div>
+          <p class="impact-txt">83% of MENA (projected 100% by 2050) and 74% of South Asia are exposed to extremely high baseline water stress.</p>
+        </div>
+        <div class="impact-card violet">
+          <span class="badge b-violet">Statista 2025</span>
+          <div class="impact-num">2B &rarr; 5.6B</div>
+          <p class="impact-txt">Installed AC units worldwide will surge from &gt;2 billion (2025) to 5.6 billion by 2050 as urban populations expand.</p>
+        </div>
+        <div class="impact-card green">
+          <span class="badge b-green">Untapped Supply</span>
+          <div class="impact-num">Only 4%</div>
+          <p class="impact-txt">Jordan field survey found only 4% of users ever reused AC condensate. AC-WAIS automates safe potable recovery.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span><strong>AC-WAIS Team (SGS Makassar, Indonesia):</strong> Nicholas Joshua Lo, Santika Sriwijaya, Felix Wilbert Gosal, Anya Hoeijaya, Fiona Gauw</span>
+    <span>Seoul International Invention Fair (SIIF) 2026 &bull; 100% Offline Interactive Exhibition Simulator</span>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* =======================================================================
+         1. CONSTANTS, EMPIRICAL PRESETS & DATA TABLES
+         ======================================================================= */
+      const CYCLE_VOL_L = 1.30;
+      const RES_MAX_L = 2.60;
+      const SAFE_PH_MIN = 6.5;
+      const SAFE_PH_MAX = 7.5;
+      const SAFE_TDS_MAX = 500;
+
+      const PRESETS = {
+        sgs:     { name: 'SGS Lab Sample',       ph: 6.80, tds: 17 },
+        bblk:    { name: 'BB Labkesmas',         ph: 7.20, tds: 41.56 },
+        acidic:  { name: 'Acidic CO2 Exposure',  ph: 5.80, tds: 25 },
+        hightds: { name: 'High TDS Alert',       ph: 6.10, tds: 540 }
+      };
+
+      const COMPONENT_INFO = {
+        ac:        'Split AC Evaporator Unit: Removes indoor airborne moisture via cooling coils, producing clean condensate normally wasted down drains.',
+        well:      'Wall Collection Well: Buffers raw AC condensate from the evaporator drip line before automated intake pumping.',
+        pump1:     'Pump 1 (Relay CH1): Runs for 10 seconds to push raw AC condensate through the UV-C coiled hose into the dual-layer treatment chamber.',
+        enclosure: 'Prototype Enclosure: Melamine-coated plywood (35.5 cm W × 54.5 cm H × 50.0 cm L) with 4 metal corner bars, 4 detachable casters, and hinged maintenance lid.',
+        led:       'Arduino UNO LED Matrix Display: Displays real-time automation status, pH/TDS confirmation, Mg(OH)2 dosing, and bottle dispensing alerts.',
+        uv:        'UV-C Coiled Hose Chamber (Relay CH3): Four 254 nm germicidal UV-C lamps irradiate flowing condensate (up to 98.3% E. coli DNA inactivation) without chemical byproducts.',
+        carbon:    'Layer 1 — Activated Carbon Filter: Adsorbs Volatile Organic Compounds (VOCs) and Total Organic Carbon (TOCs) as water enters the treatment tank.',
+        sensors:   'Layer 2 — Sensor Chamber: DFRobot PH4502C analog pH probe (6.5–7.5 target) and digital TDS sensor (<500 ppm target) conduct a 10-second quality check.',
+        doser:     'Mg(OH)2 Alkaline Doser (Relay CH4): Automatically dispenses weak base Magnesium Hydroxide if carbonic acid lowers pH below 6.5, then runs a 2nd quality check.',
+        pump2:     'Pump 2 (Relay CH2): Transfers exactly 1.30 L of quality-confirmed potable water per cycle into the 2.60 L Potable Reservoir.',
+        reservoir: 'Enlarged Potable Reservoir (2.60 L): Stores 2 full 1.30 L treatment cycles meeting WHO Drinking-Water Quality Guidelines. Automatically drains when full.',
+        valve:     'Automated Solenoid Drain Valve: Opens automatically when the 2.60 L reservoir reaches full capacity (or via manual override) to fill the drinking bottle.',
+        bottle:    'Potable Drinking Bottle (2.60 L): Receives freshly treated, UV-sterilized, carbon-filtered potable water, stamped READY TO CONSUME for booth visitors.'
+      };
+
+      const ION_TESTS = [
+        { id: 'cl',  ion: 'Chloride',   sym: 'Cl<sup>&minus;</sup>',    reag: 'AgNO<sub>3</sub>',         pptColor: '#f8fafc', pptName: 'White AgCl ppt',       eq: 'Ag<sup>+</sup> + Cl<sup>&minus;</sup> &rarr; AgCl(s)' },
+        { id: 'mg',  ion: 'Magnesium',  sym: 'Mg<sup>2+</sup>',         reag: 'NaOH',                     pptColor: '#f8fafc', pptName: 'White Mg(OH)<sub>2</sub> ppt', eq: 'Mg<sup>2+</sup> + 2OH<sup>&minus;</sup> &rarr; Mg(OH)<sub>2</sub>(s)' },
+        { id: 'zn',  ion: 'Zinc',       sym: 'Zn<sup>2+</sup>',         reag: 'NaOH',                     pptColor: '#f1f5f9', pptName: 'White Zn(OH)<sub>2</sub> ppt', eq: 'Zn<sup>2+</sup> + 2OH<sup>&minus;</sup> &rarr; Zn(OH)<sub>2</sub>(s)' },
+        { id: 'fe',  ion: 'Iron(II)',   sym: 'Fe<sup>2+</sup>',         reag: 'NaOH',                     pptColor: '#4ade80', pptName: 'Green Fe(OH)<sub>2</sub> ppt', eq: 'Fe<sup>2+</sup> + 2OH<sup>&minus;</sup> &rarr; Fe(OH)<sub>2</sub>(s)' },
+        { id: 'ca',  ion: 'Calcium',    sym: 'Ca<sup>2+</sup>',         reag: 'NaOH',                     pptColor: '#f8fafc', pptName: 'White Ca(OH)<sub>2</sub> ppt', eq: 'Ca<sup>2+</sup> + 2OH<sup>&minus;</sup> &rarr; Ca(OH)<sub>2</sub>(s)' },
+        { id: 'so4', ion: 'Sulfate',    sym: 'SO<sub>4</sub><sup>2&minus;</sup>', reag: 'Dil. HCl + BaCl<sub>2</sub>', pptColor: '#f8fafc', pptName: 'White BaSO<sub>4</sub> ppt', eq: 'Ba<sup>2+</sup> + SO<sub>4</sub><sup>2&minus;</sup> &rarr; BaSO<sub>4</sub>(s)' }
+      ];
+
+      const QUANT_DATA = [
+        { p: 'Total Dissolved Solids (TDS)', cat: 'physical', res: '41.56 mg/L', lim: '< 300 mg/L', m: 'IKM KKT/055/BBLK-MKS' },
+        { p: 'Turbidity',                    cat: 'physical', res: '0.550 NTU',  lim: '< 3 NTU',    m: 'SNI 06-6989.25-2005' },
+        { p: 'Color',                        cat: 'physical', res: '< 3 TCU',    lim: '10 TCU',     m: 'SNI 06-6989.25-2005' },
+        { p: 'Odor',                         cat: 'physical', res: 'No odor',    lim: 'No odor',    m: 'Organoleptic Test' },
+        { p: 'pH',                           cat: 'chemical', res: '7.20',       lim: '6.5 - 8.5',  m: 'SNI 6989.11:2019' },
+        { p: 'Nitrate (NO<sub>3</sub><sup>&minus;</sup>)', cat: 'chemical', res: '0.228 mg/L', lim: '20 mg/L', m: 'SM 4500-NO3-B UV' },
+        { p: 'Iron (Fe<sup>2+</sup>)',       cat: 'chemical', res: '< 0.00001 mg/L', lim: '0.2 mg/L', m: 'ICP-MS Internal' },
+        { p: 'Manganese (Mn<sup>2+</sup>)',  cat: 'chemical', res: '< 0.00001 mg/L', lim: '0.1 mg/L', m: 'ICP-MS Internal' },
+        { p: 'Lead (Pb<sup>2+</sup>)',       cat: 'chemical', res: '< 0.0001 mg/L',  lim: '0.001 mg/L', m: 'ICP-MS Internal' },
+        { p: 'Arsenic (As<sup>3+</sup>)',    cat: 'chemical', res: '< 0.00001 mg/L', lim: '0.01 mg/L', m: 'ICP-MS Internal' },
+        { p: 'Fluoride (F<sup>&minus;</sup>)', cat: 'chemical', res: '< 0.1 mg/L',   lim: '1.5 mg/L', m: 'ICP-MS Internal' },
+        { p: 'Copper (Cu<sup>2+</sup>)',     cat: 'chemical', res: '< 0.001 mg/L',   lim: '2.0 mg/L', m: 'ICP-MS Internal' },
+        { p: 'Residual Chlorine',            cat: 'chemical', res: '0.012 mg/L',    lim: '0.2 - 0.5 mg/L', m: 'Spectrophotometry' },
+        { p: 'E. coli',                      cat: 'micro',    res: '0 CFU/100mL',   lim: '0 CFU/100mL', m: 'IKM-MIKI-15 MPN' },
+        { p: 'Pseudomonas aeruginosa*',      cat: 'micro',    res: '0 CFU/100mL',   lim: '0 CFU/100mL', m: 'ISO 16266:2006' },
+        { p: 'Legionella sp.*',              cat: 'micro',    res: '< 1 MPN/100mL', lim: '< 1 CFU/mL',  m: 'BBLK-MKS Internal' },
+        { p: 'Heterotrophic Plate Count',    cat: 'micro',    res: '102 CFU/100mL', lim: '< 500 CFU/mL', m: 'SM 2017:9215D' }
+      ];
+
+      /* =======================================================================
+         2. APPLICATION STATE
+         ======================================================================= */
+      const sim = {
+        running: false,
+        state: 'IDLE', // IDLE, PUMP1_UV, CONFIRM_1, DOSING_MG, CONFIRM_2, PUMP2_TRANSFER, CYCLE_PAUSE, DRAINING_BOTTLE, BOTTLE_READY, TDS_LOCKOUT, PH_HIGH_ALERT
+        elapsed: 0,
+        duration: 0,
+        speed: 1,
+        autoLoop: true,
+        manualDrainOnly: false,
+
+        rawPH: 6.80,
+        rawTDS: 17,
+        livePH: 6.80,
+        liveTDS: 17,
+        doseStartPH: 5.80,
+
+        wellLevel: 0.72,      // 0..1
+        l2Level: 0.06,        // 0..1
+        cycleYieldL: 0,       // 0..1.30
+        resL: 0,              // 0..2.60
+        resStartL: 0,
+        bottleL: 0,           // 0..2.60
+        bottleTargetL: 2.60,
+
+        bottlesReady: 0,
+        cyclesDone: 0,
+        totalYieldL: 0,
+
+        p1Angle: 0,
+        p2Angle: 0,
+        wavePhase: 0,
+        dripPhase: 0,
+        microbes: [],
+        vocs: [],
+        mgDrops: [],
+        coilLen: 1450,
+
+        relays: { p1: false, p2: false, uv: false, mg: false, vlv: false }
+      };
+
+      /* =======================================================================
+         3. DOM REFERENCES
+         ======================================================================= */
+      const $ = (id) => document.getElementById(id);
+      const el = {
+        toast: $('toast-bar'),
+        btnStart: $('btn-start-stop'),
+        btnReset: $('btn-reset'),
+        btnLoop: $('btn-auto-loop'),
+        loopTxt: $('loop-txt'),
+        btnDrain: $('btn-drain'),
+        btnFs: $('btn-fullscreen'),
+        fsLabel: $('fs-label'),
+        inspector: $('inspector-bar'),
+
+        // SVG Elements
+        ledText: $('svg-led-text'),
+        acDrips: $('ac-drips'),
+        wellWater: $('well-water'),
+        wellWave: $('well-wave'),
+        pipeP1: $('pipe-p1'),
+        p1Rotor: $('pump1-rotor'),
+        uvAura: $('uv-aura'),
+        uvRays: $('uv-rays'),
+        uvCoil: $('uv-coil-path'),
+        uvParticles: $('uv-particles'),
+        carbonParticles: $('carbon-particles'),
+        l2Water: $('l2-water'),
+        l2Wave: $('l2-wave'),
+        mgDrops: $('mg-drops'),
+        doserBox: $('doser-box'),
+        svgPh: $('svg-ph-val'),
+        svgTds: $('svg-tds-val'),
+        pipeP2: $('pipe-p2'),
+        p2Rotor: $('pump2-rotor'),
+        resWater: $('res-water'),
+        resWave: $('res-wave'),
+        svgResVal: $('svg-res-val'),
+        svgResSub: $('svg-res-sub'),
+        pipeDrain: $('pipe-drain'),
+        valveBody: $('valve-body'),
+        valveLed: $('valve-led'),
+        valveTxt: $('valve-txt'),
+        streamGroup: $('drain-stream-group'),
+        drainStream: $('drain-stream'),
+        drainSplash: $('drain-splash'),
+        bottleWater: $('bottle-water'),
+        bottleWave: $('bottle-wave'),
+        svgBottleVal: $('svg-bottle-val'),
+        svgBottlePct: $('svg-bottle-pct'),
+        readyBadge: $('bottle-ready-badge'),
+
+        // HUD Elements
+        phaseCard: $('phase-card'),
+        phaseTitle: $('phase-title'),
+        phaseTimer: $('phase-timer'),
+        phaseMsg: $('phase-msg'),
+        hudPh: $('hud-ph'),
+        badgePh: $('badge-ph'),
+        hudTds: $('hud-tds'),
+        badgeTds: $('badge-tds'),
+        hudCycle: $('hud-cycle'),
+        barCycle: $('bar-cycle'),
+        hudRes: $('hud-res'),
+        badgeRes: $('badge-res'),
+        barRes: $('bar-res'),
+        cntBottles: $('cnt-bottles'),
+        cntCycles: $('cnt-cycles'),
+        cntLiters: $('cnt-liters'),
+        relP1: $('rel-p1'),
+        relP2: $('rel-p2'),
+        relUv: $('rel-uv'),
+        relMg: $('rel-mg'),
+        relVlv: $('rel-vlv'),
+        slPh: $('sl-ph'),
+        valSlPh: $('val-sl-ph'),
+        slTds: $('sl-tds'),
+        valSlTds: $('val-sl-tds'),
+
+        // Drawer & Diagnostics
+        btnDrawer: $('btn-drawer'),
+        diagDrawer: $('diag-drawer'),
+        drawerChev: $('drawer-chevron'),
+        btnClearLog: $('btn-clear-log'),
+        serialBox: $('serial-box'),
+        adcPhRaw: $('adc-ph-raw'),
+        adcPhV: $('adc-ph-v'),
+        adcPhOut: $('adc-ph-out'),
+        adcTdsRaw: $('adc-tds-raw'),
+        adcTdsOut: $('adc-tds-out'),
+        adcState: $('adc-state')
+      };
+
+      const uvTubes = Array.from(document.querySelectorAll('.uv-tube'));
+      const stepCells = Array.from(document.querySelectorAll('#steps-row .step-cell'));
+
+      /* =======================================================================
+         4. HELPER UTILITIES
+         ======================================================================= */
+      let toastTimer = null;
+      function showToast(msg) {
+        if (!el.toast) return;
+        el.toast.textContent = msg;
+        el.toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.toast.classList.remove('show'), 3200);
+      }
+
+      function logSerial(msg, cls) {
+        if (!el.serialBox) return;
+        const d = new Date();
+        const ts = [d.getHours(), d.getMinutes(), d.getSeconds()]
+          .map((n) => String(n).padStart(2, '0')).join(':');
+        const line = document.createElement('div');
+        line.innerHTML = '<span class="sl-ts">[' + ts + ']</span><span class="' + (cls || 'sl-info') + '">' + msg + '</span>';
+        el.serialBox.appendChild(line);
+        while (el.serialBox.childNodes.length > 90) {
+          el.serialBox.removeChild(el.serialBox.firstChild);
+        }
+        el.serialBox.scrollTop = el.serialBox.scrollHeight;
+      }
+
+      function setLED(text) {
+        if (el.ledText) el.ledText.textContent = text;
+      }
+
+      function setRelays(p1, p2, uv, mg, vlv) {
+        sim.relays = { p1, p2, uv, mg, vlv };
+
+        updateRelayEl(el.relP1, p1, 'on-p1', p1 ? 'HIGH' : 'LOW');
+        updateRelayEl(el.relP2, p2, 'on-p2', p2 ? 'HIGH' : 'LOW');
+        updateRelayEl(el.relUv, uv, 'on-uv', uv ? 'HIGH' : 'LOW');
+        updateRelayEl(el.relMg, mg, 'on-mg', mg ? 'HIGH' : 'LOW');
+        updateRelayEl(el.relVlv, vlv, 'on-vlv', vlv ? 'OPEN' : 'CLOSED');
+
+        // SVG visual states for pipes, UV lamps, doser, and valve
+        el.pipeP1.setAttribute('stroke', p1 ? '#38bdf8' : '#cbd5e1');
+        el.pipeP2.setAttribute('stroke', p2 ? '#10b981' : '#cbd5e1');
+        el.pipeDrain.setAttribute('stroke', vlv ? '#06b6d4' : '#cbd5e1');
+
+        el.uvAura.setAttribute('opacity', uv ? '0.20' : '0');
+        el.uvRays.setAttribute('opacity', uv ? '0.58' : '0.14');
+        uvTubes.forEach((t) => {
+          t.setAttribute('fill', uv ? '#a78bfa' : '#c4b5fd');
+          if (uv) t.setAttribute('filter', 'url(#f-uv)');
+          else t.removeAttribute('filter');
+        });
+
+        el.doserBox.setAttribute('stroke-width', mg ? '3.2' : '2');
+        el.doserBox.setAttribute('fill', mg ? '#fef3c7' : '#fffbeb');
+
+        el.valveBody.setAttribute('fill', vlv ? '#ecfeff' : '#f1f5f9');
+        el.valveBody.setAttribute('stroke', vlv ? '#0891b2' : '#64748b');
+        el.valveLed.setAttribute('fill', vlv ? '#10b981' : '#94a3b8');
+        el.valveTxt.textContent = vlv ? 'OPEN' : 'CLOSED';
+        el.valveTxt.setAttribute('fill', vlv ? '#047857' : '#475569');
+      }
+
+      function updateRelayEl(node, isOn, cls, label) {
+        if (!node) return;
+        node.classList.toggle(cls, isOn);
+        const st = node.querySelector('.r-st');
+        if (st) st.textContent = label;
+      }
+
+      function setPhaseUI(styleCls, title, msg, activeStep) {
+        el.phaseCard.className = 'phase-card ' + styleCls;
+        el.phaseTitle.textContent = title;
+        el.phaseMsg.innerHTML = msg;
+        stepCells.forEach((cell) => {
+          const s = Number(cell.dataset.step);
+          cell.classList.remove('done', 'now');
+          if (activeStep > 0) {
+            if (s < activeStep) cell.classList.add('done');
+            else if (s === activeStep) cell.classList.add('now');
+          }
+        });
+      }
+
+      /* =======================================================================
+         5. PARTICLE SYSTEM INITIALIZATION (SVG)
+         ======================================================================= */
+      function initParticles() {
+        try {
+          if (el.uvCoil && typeof el.uvCoil.getTotalLength === 'function') {
+            const len = el.uvCoil.getTotalLength();
+            if (len > 100) sim.coilLen = len;
+          }
+        } catch (e) {
+          sim.coilLen = 1450;
+        }
+
+        const ns = 'http://www.w3.org/2000/svg';
+
+        // 16 Microbe particles traveling along UV coiled hose
+        el.uvParticles.innerHTML = '';
+        sim.microbes = [];
+        for (let i = 0; i < 16; i++) {
+          const c = document.createElementNS(ns, 'circle');
+          c.setAttribute('r', '4.2');
+          c.setAttribute('fill', '#f97316');
+          c.setAttribute('stroke', '#ffffff');
+          c.setAttribute('stroke-width', '0.9');
+          c.setAttribute('opacity', '0');
+          el.uvParticles.appendChild(c);
+          sim.microbes.push({ el: c, t: i / 16 });
+        }
+
+        // 14 VOC/TOC particles trapped inside Layer 1 Carbon Filter
+        el.carbonParticles.innerHTML = '';
+        sim.vocs = [];
+        for (let i = 0; i < 14; i++) {
+          const c = document.createElementNS(ns, 'circle');
+          const bx = 548 + ((i * 39) % 244);
+          const by = 192 + ((i * 23) % 62);
+          c.setAttribute('cx', bx);
+          c.setAttribute('cy', by);
+          c.setAttribute('r', '3.4');
+          c.setAttribute('fill', '#92400e');
+          c.setAttribute('stroke', '#fde68a');
+          c.setAttribute('stroke-width', '0.7');
+          c.setAttribute('opacity', '0.25');
+          el.carbonParticles.appendChild(c);
+          sim.vocs.push({ el: c, bx, by, phase: i * 0.7 });
+        }
+
+        // 6 Mg(OH)2 alkaline white droplets under CH4 Doser
+        el.mgDrops.innerHTML = '';
+        sim.mgDrops = [];
+        for (let i = 0; i < 6; i++) {
+          const c = document.createElementNS(ns, 'circle');
+          c.setAttribute('r', '3.8');
+          c.setAttribute('fill', '#ffffff');
+          c.setAttribute('stroke', '#f59e0b');
+          c.setAttribute('stroke-width', '1.4');
+          c.setAttribute('opacity', '0');
+          el.mgDrops.appendChild(c);
+          sim.mgDrops.push({ el: c, y: 356 + i * 18 });
+        }
+      }
+
+      /* =======================================================================
+         6. ARDUINO UNO STATE MACHINE
+         ======================================================================= */
+      function enterState(nextState) {
+        sim.state = nextState;
+        sim.elapsed = 0;
+
+        switch (nextState) {
+          case 'IDLE':
+            sim.running = false;
+            sim.manualDrainOnly = false;
+            sim.duration = 0;
+            setRelays(false, false, false, false, false);
+            setLED('READY - PRESS START');
+            setPhaseUI(
+              'st-idle',
+              'IDLE — STANDBY',
+              'Press <strong>START SYSTEM (Pin 2)</strong> to begin automated 1.30 L treatment cycles &amp; automatic 2.60 L bottle dispensing.',
+              0
+            );
+            break;
+
+          case 'PUMP1_UV':
+            sim.running = true;
+            sim.duration = 10;
+            sim.cycleYieldL = 0;
+            sim.livePH = sim.rawPH;
+            sim.liveTDS = sim.rawTDS;
+            el.readyBadge.setAttribute('opacity', '0');
+            setRelays(true, false, true, false, false);
+            setLED('PUMP 1 + UV ON');
+            setPhaseUI(
+              'st-uv',
+              'STAGE 1 & 2: UV-C & CARBON',
+              'Pump 1 (CH1) pushes condensate through <strong>4&times; 254 nm UV-C lamps</strong> (inactivating microbes) and Layer 1 Activated Carbon (adsorbing VOCs/TOCs).',
+              1
+            );
+            logSerial('SYSTEM STARTED -> Pump 1 ON | 4x 254nm UV-C ON', 'sl-uv');
+            break;
+
+          case 'CONFIRM_1':
+            sim.duration = 10;
+            setRelays(false, false, true, false, false);
+            setLED('CHECKING pH/TDS');
+            setPhaseUI(
+              'st-check',
+              'STAGE 3: QUALITY CHECK (10s)',
+              'Pump 1 OFF. DFRobot PH4502C probe &amp; TDS sensor are verifying safe drinking range (<strong>pH 6.5&ndash;7.5</strong> &amp; <strong>TDS &lt; 500 ppm</strong>).',
+              3
+            );
+            logSerial('Pump 1 OFF -> 10s pH/TDS quality verification started...', 'sl-info');
+            break;
+
+          case 'DOSING_MG':
+            sim.duration = 5;
+            sim.doseStartPH = sim.livePH;
+            setRelays(false, false, true, true, false);
+            setLED('DOSING Mg(OH)2');
+            setPhaseUI(
+              'st-dose',
+              'AUTO pH ADJUSTMENT: Mg(OH)2',
+              'Acidic condensate detected (<strong>pH ' + sim.livePH.toFixed(2) + ' &lt; 6.5</strong>). CH4 Doser dispenses weak base <strong>Mg(OH)<sub>2</sub></strong> to neutralize carbonic acid.',
+              3
+            );
+            logSerial('ALERT: pH ' + sim.livePH.toFixed(2) + ' < 6.5 -> CH4 Mg(OH)2 Doser ON', 'sl-warn');
+            break;
+
+          case 'CONFIRM_2':
+            sim.duration = 4;
+            sim.livePH = 7.05;
+            setRelays(false, false, true, false, false);
+            setLED('RE-CHECKING pH');
+            setPhaseUI(
+              'st-check',
+              '2ND QUALITY CONFIRMATION',
+              'Mg(OH)<sub>2</sub> dosing complete. Re-verifying neutralized water (<strong>pH ' + sim.livePH.toFixed(2) + '</strong>, TDS ' + Math.round(sim.liveTDS) + ' ppm) before Pump 2.',
+              3
+            );
+            logSerial('Mg(OH)2 Doser OFF -> 2nd confirmation check: pH ' + sim.livePH.toFixed(2) + ' OK', 'sl-ok');
+            break;
+
+          case 'PUMP2_TRANSFER':
+            sim.duration = 10;
+            sim.resStartL = sim.resL;
+            setRelays(false, true, true, false, false);
+            setLED('PUMP 2 -> 1.30 L');
+            setPhaseUI(
+              'st-ok',
+              'STAGE 4: PUMP 2 TO RESERVOIR',
+              'Potable quality confirmed! Pump 2 (CH2) transfers <strong>1.30 L</strong> of clean drinking water into the <strong>2.60 L Potable Reservoir</strong>.',
+              4
+            );
+            logSerial('QUALITY CONFIRMED (pH ' + sim.livePH.toFixed(2) + ', TDS ' + Math.round(sim.liveTDS) + ' ppm) -> Pump 2 ON (1.30 L)', 'sl-ok');
+            break;
+
+          case 'CYCLE_PAUSE':
+            sim.duration = 1.8;
+            setRelays(false, false, false, false, false);
+            setLED('CYCLE 1 DONE 1.30L');
+            setPhaseUI(
+              'st-ok',
+              'RESERVOIR: ' + sim.resL.toFixed(2) + ' / 2.60 L',
+              'Cycle complete (+1.30 L). ' + (sim.autoLoop ? 'Auto-Loop starting Cycle 2 to fill the 2.60 L reservoir...' : 'Press START for Cycle 2 or tap Drain to Bottle.'),
+              5
+            );
+            break;
+
+          case 'DRAINING_BOTTLE':
+            sim.running = true;
+            sim.duration = 5.2;
+            sim.resStartL = sim.resL;
+            sim.bottleTargetL = sim.resL;
+            sim.bottleL = 0;
+            el.readyBadge.setAttribute('opacity', '0');
+            setRelays(false, false, false, false, true);
+            setLED('DRAINING TO BOTTLE');
+            setPhaseUI(
+              'st-drain',
+              'STAGE 6: AUTO-DRAIN TO BOTTLE',
+              'Reservoir occupied (' + sim.resStartL.toFixed(2) + ' L). Solenoid Dispense Valve <strong>OPEN</strong> &mdash; smoothly filling the Potable Drinking Bottle!',
+              6
+            );
+            logSerial('RESERVOIR FULL (' + sim.resStartL.toFixed(2) + ' L) -> Auto-Drain Valve OPEN -> Filling Drinking Bottle', 'sl-ok');
+            break;
+
+          case 'BOTTLE_READY':
+            sim.duration = 2.5;
+            sim.resL = 0;
+            sim.bottleL = sim.bottleTargetL;
+            setRelays(false, false, false, false, false);
+            el.readyBadge.setAttribute('opacity', '1');
+            setLED('BOTTLE READY!');
+            setPhaseUI(
+              'st-ok',
+              'BOTTLE READY TO CONSUME!',
+              '<strong>' + sim.bottleTargetL.toFixed(2) + ' L Potable Drinking Bottle</strong> dispensed &amp; WHO verified! ' +
+              (sim.autoLoop && !sim.manualDrainOnly ? 'Auto-Loop will place a fresh bottle shortly...' : 'Ready for visitor consumption.'),
+              6
+            );
+            logSerial('BOTTLE READY TO CONSUME (' + sim.bottleTargetL.toFixed(2) + ' L) | Total Bottles: ' + sim.bottlesReady, 'sl-ok');
+            break;
+
+          case 'TDS_LOCKOUT':
+            sim.running = false;
+            sim.duration = 0;
+            setRelays(false, false, false, false, false);
+            setLED('TDS LOCKOUT ALERT');
+            setPhaseUI(
+              'st-err',
+              'SAFETY LOCKOUT: HIGH TDS',
+              'Measured TDS (<strong>' + Math.round(sim.liveTDS) + ' ppm</strong>) exceeds the 500 ppm drinking guideline. Pump 2 blocked to protect potable reservoir.',
+              3
+            );
+            logSerial('LOCKOUT: TDS ' + Math.round(sim.liveTDS) + ' ppm >= 500 ppm! Pump 2 BLOCKED.', 'sl-err');
+            break;
+
+          case 'PH_HIGH_ALERT':
+            sim.running = false;
+            sim.duration = 0;
+            setRelays(false, false, false, false, false);
+            setLED('HIGH pH LOCKOUT');
+            setPhaseUI(
+              'st-err',
+              'SAFETY LOCKOUT: HIGH pH',
+              'Measured pH (<strong>' + sim.livePH.toFixed(2) + '</strong>) exceeds 7.5 alkaline limit. Pump 2 blocked; lower raw pH or select another preset.',
+              3
+            );
+            logSerial('LOCKOUT: High Alkalinity pH ' + sim.livePH.toFixed(2) + ' > 7.5! Pump 2 BLOCKED.', 'sl-err');
+            break;
+        }
+        syncButtons();
+        renderFrame(0);
+      }
+
+      function stepSimulation(dt) {
+        if (!sim.running && sim.state !== 'DRAINING_BOTTLE' && sim.state !== 'BOTTLE_READY') return;
+
+        // Effective time advancement based on speed mode
+        const effDt = dt * sim.speed;
+        sim.elapsed += effDt;
+        const p = sim.duration > 0 ? Math.min(1, sim.elapsed / sim.duration) : 1;
+
+        if (sim.state === 'PUMP1_UV') {
+          sim.wellLevel = 0.72 - 0.34 * p;
+          sim.l2Level = 0.08 + 0.74 * p;
+          if (p > 0.55) {
+            stepCells.forEach((c) => {
+              const s = Number(c.dataset.step);
+              c.classList.toggle('done', s < 2);
+              c.classList.toggle('now', s === 2);
+            });
+          }
+          if (p >= 1) enterState('CONFIRM_1');
+        } else if (sim.state === 'CONFIRM_1') {
+          sim.wellLevel = Math.min(0.72, sim.wellLevel + dt * 0.03);
+          if (p >= 1) {
+            if (sim.liveTDS >= SAFE_TDS_MAX) {
+              enterState('TDS_LOCKOUT');
+            } else if (sim.livePH < SAFE_PH_MIN) {
+              enterState('DOSING_MG');
+            } else if (sim.livePH > SAFE_PH_MAX) {
+              enterState('PH_HIGH_ALERT');
+            } else {
+              enterState('PUMP2_TRANSFER');
+            }
+          }
+        } else if (sim.state === 'DOSING_MG') {
+          sim.livePH = sim.doseStartPH + (7.05 - sim.doseStartPH) * p;
+          if (p >= 1) enterState('CONFIRM_2');
+        } else if (sim.state === 'CONFIRM_2') {
+          if (p >= 1) enterState('PUMP2_TRANSFER');
+        } else if (sim.state === 'PUMP2_TRANSFER') {
+          sim.l2Level = 0.82 - 0.74 * p;
+          sim.wellLevel = Math.min(0.72, sim.wellLevel + dt * 0.04);
+          sim.cycleYieldL = CYCLE_VOL_L * p;
+          sim.resL = Math.min(RES_MAX_L, sim.resStartL + CYCLE_VOL_L * p);
+          if (p >= 1) {
+            sim.cycleYieldL = CYCLE_VOL_L;
+            sim.cyclesDone += 1;
+            sim.totalYieldL += CYCLE_VOL_L;
+            sim.resL = Math.min(RES_MAX_L, Number((sim.resStartL + CYCLE_VOL_L).toFixed(2)));
+            logSerial('Pump 2 OFF | UV OFF | Cycle #' + sim.cyclesDone + ' complete (+1.30 L) -> Reservoir: ' + sim.resL.toFixed(2) + ' L', 'sl-ok');
+
+            if (sim.resL >= RES_MAX_L - 0.01) {
+              setLED('RESERVOIR FULL 2.60L');
+              sim.manualDrainOnly = false;
+              enterState('DRAINING_BOTTLE');
+            } else if (sim.autoLoop) {
+              enterState('CYCLE_PAUSE');
+            } else {
+              setLED('CYCLE DONE 1.30 L');
+              sim.running = false;
+              sim.state = 'IDLE';
+              setRelays(false, false, false, false, false);
+              setPhaseUI(
+                'st-ok',
+                'CYCLE COMPLETE (+1.30 L)',
+                'Reservoir holds <strong>' + sim.resL.toFixed(2) + ' / 2.60 L</strong>. Press <strong>START</strong> for Cycle 2 to reach 2.60 L, or tap <strong>Drain to Bottle</strong>.',
+                5
+              );
+              syncButtons();
+            }
+          }
+        } else if (sim.state === 'CYCLE_PAUSE') {
+          sim.wellLevel = Math.min(0.72, sim.wellLevel + dt * 0.14);
+          if (p >= 1) {
+            if (sim.autoLoop) enterState('PUMP1_UV');
+            else enterState('IDLE');
+          }
+        } else if (sim.state === 'DRAINING_BOTTLE') {
+          sim.resL = Math.max(0, sim.resStartL * (1 - p));
+          sim.bottleL = sim.bottleTargetL * p;
+          sim.wellLevel = Math.min(0.72, sim.wellLevel + dt * 0.08);
+          if (p >= 1) {
+            sim.bottlesReady += 1;
+            enterState('BOTTLE_READY');
+          }
+        } else if (sim.state === 'BOTTLE_READY') {
+          if (p >= 1) {
+            // Smoothly replace with a fresh empty bottle
+            sim.bottleL = 0;
+            el.readyBadge.setAttribute('opacity', '0');
+            if (sim.autoLoop && !sim.manualDrainOnly) {
+              enterState('PUMP1_UV');
+            } else {
+              enterState('IDLE');
+            }
+          }
+        }
+      }
+
+      /* =======================================================================
+         7. REAL-TIME 60FPS SVG & HUD RENDERING
+         ======================================================================= */
+      function renderFrame(dt) {
+        sim.wavePhase += dt * 4.2;
+        sim.dripPhase = (sim.dripPhase + dt * 62) % 94;
+
+        // 1. AC Drip Animation
+        const drips = el.acDrips.children;
+        for (let i = 0; i < drips.length; i++) {
+          const y = 110 + ((sim.dripPhase + i * 31) % 94);
+          drips[i].setAttribute('cy', y.toFixed(1));
+        }
+
+        // 2. Wall Collection Well Water Level (y=216..344, height=128)
+        const wellH = Math.max(12, sim.wellLevel * 124);
+        const wellY = 344 - wellH;
+        el.wellWater.setAttribute('y', wellY.toFixed(1));
+        el.wellWater.setAttribute('height', wellH.toFixed(1));
+        const wOff = Math.sin(sim.wavePhase) * 3.5;
+        el.wellWave.setAttribute('d', `M56 ${wellY.toFixed(1)} Q88 ${(wellY - wOff).toFixed(1)} 119 ${wellY.toFixed(1)} T182 ${wellY.toFixed(1)} L182 ${(wellY + 10).toFixed(1)} L56 ${(wellY + 10).toFixed(1)} Z`);
+
+        // 3. Pump Impeller Spin
+        if (sim.relays.p1) {
+          sim.p1Angle = (sim.p1Angle + dt * 360 * sim.speed) % 360;
+          el.p1Rotor.setAttribute('transform', `rotate(${sim.p1Angle.toFixed(1)} 174 448)`);
+        }
+        if (sim.relays.p2) {
+          sim.p2Angle = (sim.p2Angle + dt * 360 * sim.speed) % 360;
+          el.p2Rotor.setAttribute('transform', `rotate(${sim.p2Angle.toFixed(1)} 912 448)`);
+        }
+
+        // 4. UV-C Microbe Particle Motion & Color Transformation (Orange -> Sky Blue)
+        if (sim.relays.p1) {
+          for (let i = 0; i < sim.microbes.length; i++) {
+            const m = sim.microbes[i];
+            m.t = (m.t + dt * 0.14 * sim.speed) % 1;
+            try {
+              const pt = el.uvCoil.getPointAtLength(m.t * sim.coilLen);
+              m.el.setAttribute('cx', pt.x.toFixed(1));
+              m.el.setAttribute('cy', pt.y.toFixed(1));
+              m.el.setAttribute('opacity', '0.96');
+              // Orange before mid-coil, UV-inactivated sky-blue after UV exposure
+              m.el.setAttribute('fill', m.t < 0.42 ? '#f97316' : '#38bdf8');
+            } catch (e) {
+              m.el.setAttribute('opacity', '0');
+            }
+          }
+        } else {
+          for (let i = 0; i < sim.microbes.length; i++) {
+            sim.microbes[i].el.setAttribute('opacity', '0');
+          }
+        }
+
+        // 5. Layer 1 Carbon Filter VOC/TOC Adsorption Glow
+        for (let i = 0; i < sim.vocs.length; i++) {
+          const v = sim.vocs[i];
+          if (sim.relays.p1) {
+            const j = Math.sin(sim.wavePhase * 1.4 + v.phase) * 2.2;
+            v.el.setAttribute('cx', (v.bx + j).toFixed(1));
+            v.el.setAttribute('opacity', '0.92');
+          } else {
+            v.el.setAttribute('opacity', sim.l2Level > 0.2 ? '0.68' : '0.28');
+          }
+        }
+
+        // 6. Layer 2 Water Level (y=274..482, height=208)
+        const l2H = Math.max(10, sim.l2Level * 194);
+        const l2Y = 482 - l2H;
+        el.l2Water.setAttribute('y', l2Y.toFixed(1));
+        el.l2Water.setAttribute('height', l2H.toFixed(1));
+        el.l2Wave.setAttribute('d', `M536 ${l2Y.toFixed(1)} Q603 ${(l2Y - wOff).toFixed(1)} 670 ${l2Y.toFixed(1)} T804 ${l2Y.toFixed(1)} L804 ${(l2Y + 10).toFixed(1)} L536 ${(l2Y + 10).toFixed(1)} Z`);
+
+        // 7. Mg(OH)2 Alkaline Droplets Falling into Layer 2
+        for (let i = 0; i < sim.mgDrops.length; i++) {
+          const d = sim.mgDrops[i];
+          if (sim.relays.mg) {
+            d.y += dt * 115 * sim.speed;
+            if (d.y > Math.min(468, l2Y + 26)) d.y = 356;
+            d.el.setAttribute('cx', (752 + Math.sin(d.y * 0.14 + i) * 4).toFixed(1));
+            d.el.setAttribute('cy', d.y.toFixed(1));
+            d.el.setAttribute('opacity', '0.96');
+          } else {
+            d.el.setAttribute('opacity', '0');
+          }
+        }
+
+        // 8. Enlarged Potable Reservoir (2.60 L, y=130..464 -> max fill height = 338px)
+        const resRatio = Math.max(0, Math.min(1, sim.resL / RES_MAX_L));
+        const resH = resRatio * 338;
+        const resY = 468 - resH;
+        el.resWater.setAttribute('y', resY.toFixed(1));
+        el.resWater.setAttribute('height', resH.toFixed(1));
+        el.resWave.setAttribute('opacity', resH > 3 ? '0.72' : '0');
+        el.resWave.setAttribute('d', `M974 ${resY.toFixed(1)} Q1019 ${(resY - wOff * 1.1).toFixed(1)} 1064 ${resY.toFixed(1)} T1154 ${resY.toFixed(1)} L1154 ${(resY + 10).toFixed(1)} L974 ${(resY + 10).toFixed(1)} Z`);
+        el.svgResVal.textContent = sim.resL.toFixed(2) + ' L';
+        const cycInTank = (sim.resL / CYCLE_VOL_L).toFixed(1);
+        el.svgResSub.textContent = resRatio >= 0.995 ? 'FULL! Auto-Draining' : `${cycInTank} / 2 Cycles (2.60 L)`;
+
+        // 9. Potable Drinking Bottle Fill & Pouring Stream (y=302..520 -> height = 218px)
+        const bottleRatio = Math.max(0, Math.min(1, sim.bottleL / RES_MAX_L));
+        const botH = bottleRatio * 212;
+        const botY = 520 - botH;
+        el.bottleWater.setAttribute('y', botY.toFixed(1));
+        el.bottleWater.setAttribute('height', botH.toFixed(1));
+        el.bottleWave.setAttribute('opacity', botH > 2 ? '0.78' : '0');
+        el.bottleWave.setAttribute('d', `M1256 ${botY.toFixed(1)} Q1285 ${(botY - wOff).toFixed(1)} 1314 ${botY.toFixed(1)} T1372 ${botY.toFixed(1)} L1372 ${(botY + 8).toFixed(1)} L1256 ${(botY + 8).toFixed(1)} Z`);
+
+        if (sim.relays.vlv) {
+          el.streamGroup.setAttribute('opacity', '0.94');
+          const streamH = Math.max(12, botY - 284);
+          el.drainStream.setAttribute('height', streamH.toFixed(1));
+          el.drainSplash.setAttribute('cy', botY.toFixed(1));
+          el.drainSplash.setAttribute('rx', (14 + Math.abs(Math.sin(sim.wavePhase * 2.5)) * 7).toFixed(1));
+        } else {
+          el.streamGroup.setAttribute('opacity', '0');
+        }
+
+        el.svgBottleVal.textContent = sim.bottleL.toFixed(2) + ' L';
+        if (sim.state === 'BOTTLE_READY') {
+          el.svgBottlePct.textContent = '100% WHO Safe';
+          el.svgBottlePct.setAttribute('fill', '#059669');
+        } else if (sim.state === 'DRAINING_BOTTLE') {
+          el.svgBottlePct.textContent = Math.round((sim.bottleL / Math.max(0.01, sim.bottleTargetL)) * 100) + '% Filling...';
+          el.svgBottlePct.setAttribute('fill', '#0891b2');
+        } else {
+          el.svgBottlePct.textContent = 'Empty Bottle';
+          el.svgBottlePct.setAttribute('fill', '#64748b');
+        }
+
+        // 10. Live SVG Sensor Pills & Right HUD Telemetry
+        el.svgPh.textContent = 'pH ' + sim.livePH.toFixed(2);
+        el.svgTds.textContent = Math.round(sim.liveTDS) + ' ppm';
+
+        el.hudPh.textContent = sim.livePH.toFixed(2);
+        const phSafe = sim.livePH >= SAFE_PH_MIN && sim.livePH <= SAFE_PH_MAX;
+        el.badgePh.className = 'badge ' + (phSafe ? 'b-green' : (sim.livePH < SAFE_PH_MIN ? 'b-amber' : 'b-red'));
+        el.badgePh.textContent = phSafe ? '6.5–7.5 OK' : (sim.livePH < SAFE_PH_MIN ? 'Acidic <6.5' : 'Alkaline >7.5');
+
+        el.hudTds.textContent = Math.round(sim.liveTDS) + ' ppm';
+        const tdsSafe = sim.liveTDS < SAFE_TDS_MAX;
+        el.badgeTds.className = 'badge ' + (tdsSafe ? 'b-green' : 'b-red');
+        el.badgeTds.textContent = tdsSafe ? '<500 OK' : 'ALERT >=500';
+
+        el.hudCycle.textContent = sim.cycleYieldL.toFixed(2) + ' / 1.30 L';
+        el.barCycle.style.width = ((sim.cycleYieldL / CYCLE_VOL_L) * 100).toFixed(1) + '%';
+
+        el.hudRes.textContent = sim.resL.toFixed(2) + ' / 2.60 L';
+        el.barRes.style.width = (resRatio * 100).toFixed(1) + '%';
+        el.badgeRes.textContent = resRatio >= 0.99 ? 'FULL 2.60 L' : Math.round(resRatio * 100) + '% Full';
+
+        el.cntBottles.textContent = String(sim.bottlesReady);
+        el.cntCycles.textContent = String(sim.cyclesDone);
+        el.cntLiters.textContent = sim.totalYieldL.toFixed(2) + ' L';
+
+        if (sim.duration > 0) {
+          const rem = Math.max(0, sim.duration - sim.elapsed);
+          el.phaseTimer.textContent = rem.toFixed(1) + ' s';
+        } else {
+          el.phaseTimer.textContent = 'READY';
+        }
+
+        // 11. Arduino UNO PH4502C & TDS ADC Diagnostics Math
+        const phV = Math.max(0, Math.min(5, 2.5 - (sim.livePH - 7.0) * 0.18));
+        const phRaw = Math.round((phV / 5.0) * 1023);
+        const tdsRaw = Math.round(Math.max(0, Math.min(1023, (sim.liveTDS / 1000) * 1023)));
+
+        el.adcPhRaw.textContent = String(phRaw);
+        el.adcPhV.textContent = phV.toFixed(3) + ' V';
+        el.adcPhOut.textContent = sim.livePH.toFixed(2);
+        el.adcTdsRaw.textContent = String(tdsRaw);
+        el.adcTdsOut.textContent = Math.round(sim.liveTDS) + ' ppm';
+        el.adcState.textContent = sim.state;
+      }
+
+      function syncButtons() {
+        const active = sim.running || sim.state === 'DRAINING_BOTTLE' || sim.state === 'BOTTLE_READY';
+        if (active) {
+          el.btnStart.className = 'btn btn-stop';
+          el.btnStart.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="14" height="14" rx="2"></rect></svg> STOP / ABORT (Pin 2)';
+        } else {
+          el.btnStart.className = 'btn btn-start';
+          el.btnStart.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg> START SYSTEM (Pin 2)';
+        }
+
+        // Disable input sliders only during active treatment
+        const lockInputs = sim.running;
+        el.slPh.disabled = lockInputs;
+        el.slTds.disabled = lockInputs;
+
+        // Enable manual Drain to Bottle whenever reservoir has water and not currently draining
+        const canDrain = sim.resL >= 0.05 && sim.state !== 'DRAINING_BOTTLE' && sim.state !== 'BOTTLE_READY';
+        el.btnDrain.disabled = !canDrain;
+      }
+
+      /* =======================================================================
+         8. MAIN ANIMATION LOOP (60FPS SAFE DELTA)
+         ======================================================================= */
+      let lastTs = performance.now();
+      function loop(now) {
+        const dt = Math.min(0.1, Math.max(0, (now - lastTs) / 1000));
+        lastTs = now;
+        stepSimulation(dt);
+        renderFrame(dt);
+        requestAnimationFrame(loop);
+      }
+
+      /* =======================================================================
+         9. CONTROLS & EVENT BINDING
+         ======================================================================= */
+      function applyPreset(key) {
+        const p = PRESETS[key];
+        if (!p) return;
+        document.querySelectorAll('.preset-card').forEach((b) => {
+          b.classList.toggle('active', b.dataset.preset === key);
+        });
+        sim.rawPH = p.ph;
+        sim.rawTDS = p.tds;
+        if (!sim.running) {
+          sim.livePH = p.ph;
+          sim.liveTDS = p.tds;
+        }
+        el.slPh.value = p.ph.toFixed(2);
+        el.valSlPh.textContent = p.ph.toFixed(2);
+        el.slTds.value = Math.round(p.tds);
+        el.valSlTds.textContent = Math.round(p.tds) + ' ppm';
+        logSerial('Preset loaded: ' + p.name + ' (pH ' + p.ph.toFixed(2) + ', TDS ' + p.tds + ' ppm)', 'sl-info');
+        if (sim.state === 'TDS_LOCKOUT' || sim.state === 'PH_HIGH_ALERT') {
+          enterState('IDLE');
+        }
+      }
+
+      // Tabs
+      document.querySelectorAll('.tab-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.dataset.tab;
+          document.querySelectorAll('.tab-btn').forEach((b) => {
+            const on = b === btn;
+            b.classList.toggle('active', on);
+            b.setAttribute('aria-selected', on ? 'true' : 'false');
+          });
+          document.querySelectorAll('.tab-panel').forEach((p) => {
+            p.classList.toggle('active', p.id === target);
+          });
+        });
+      });
+
+      // Start / Stop Button
+      el.btnStart.addEventListener('click', () => {
+        const active = sim.running || sim.state === 'DRAINING_BOTTLE' || sim.state === 'BOTTLE_READY';
+        if (active) {
+          logSerial('STOP / ABORT pressed on Pin 2 -> Returning safely to IDLE', 'sl-warn');
+          enterState('IDLE');
+        } else {
+          if (sim.resL >= RES_MAX_L - 0.01) {
+            sim.manualDrainOnly = false;
+            enterState('DRAINING_BOTTLE');
+          } else {
+            sim.manualDrainOnly = false;
+            enterState('PUMP1_UV');
+          }
+        }
+      });
+
+      // Reset Button
+      el.btnReset.addEventListener('click', () => {
+        sim.resL = 0;
+        sim.bottleL = 0;
+        sim.cycleYieldL = 0;
+        sim.wellLevel = 0.72;
+        sim.l2Level = 0.06;
+        sim.bottlesReady = 0;
+        sim.cyclesDone = 0;
+        sim.totalYieldL = 0;
+        sim.livePH = sim.rawPH;
+        sim.liveTDS = sim.rawTDS;
+        el.readyBadge.setAttribute('opacity', '0');
+        enterState('IDLE');
+        logSerial('System & counters reset to 0.00 L.', 'sl-info');
+        showToast('Simulator reset to 0.00 L standby.');
+      });
+
+      // Speed Toggle
+      document.querySelectorAll('.seg-btn[data-speed]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          sim.speed = Number(btn.dataset.speed) || 1;
+          document.querySelectorAll('.seg-btn[data-speed]').forEach((b) => b.classList.toggle('active', b === btn));
+          logSerial('Simulation speed set to ' + sim.speed + 'x', 'sl-info');
+        });
+      });
+
+      // Auto-Loop Toggle
+      el.btnLoop.addEventListener('click', () => {
+        sim.autoLoop = !sim.autoLoop;
+        el.btnLoop.classList.toggle('active', sim.autoLoop);
+        el.btnLoop.setAttribute('aria-pressed', sim.autoLoop ? 'true' : 'false');
+        el.loopTxt.textContent = sim.autoLoop ? 'ON' : 'OFF';
+        showToast(sim.autoLoop ? 'Booth Auto-Loop ON: Cycles & bottle dispensing repeat smoothly.' : 'Booth Auto-Loop OFF: Manual cycle control.');
+      });
+
+      // Manual Drain to Bottle Button
+      el.btnDrain.addEventListener('click', () => {
+        if (sim.resL < 0.05) return;
+        sim.manualDrainOnly = !sim.autoLoop;
+        enterState('DRAINING_BOTTLE');
+      });
+
+      // Preset Cards
+      document.querySelectorAll('.preset-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          const wasRunning = sim.running;
+          if (wasRunning) enterState('IDLE');
+          applyPreset(card.dataset.preset);
+          if (wasRunning) enterState('PUMP1_UV');
+        });
+      });
+
+      // Sliders
+      el.slPh.addEventListener('input', () => {
+        sim.rawPH = Number(el.slPh.value);
+        sim.livePH = sim.rawPH;
+        el.valSlPh.textContent = sim.rawPH.toFixed(2);
+        document.querySelectorAll('.preset-card').forEach((b) => b.classList.remove('active'));
+      });
+
+      el.slTds.addEventListener('input', () => {
+        sim.rawTDS = Number(el.slTds.value);
+        sim.liveTDS = sim.rawTDS;
+        el.valSlTds.textContent = Math.round(sim.rawTDS) + ' ppm';
+        document.querySelectorAll('.preset-card').forEach((b) => b.classList.remove('active'));
+      });
+
+      // SVG Component Inspector
+      document.querySelectorAll('.hit[data-info]').forEach((g) => {
+        g.addEventListener('click', () => {
+          const info = COMPONENT_INFO[g.dataset.info];
+          if (info) {
+            el.inspector.innerHTML = '<span><strong>Inspector:</strong> ' + info + '</span><span class="badge b-blue">Verified Spec</span>';
+          }
+        });
+      });
+
+      // Collapsible Arduino Drawer
+      el.btnDrawer.addEventListener('click', () => {
+        const open = el.diagDrawer.classList.toggle('open');
+        el.btnDrawer.setAttribute('aria-expanded', open ? 'true' : 'false');
+        el.drawerChev.innerHTML = open ? '&#x25B2; Collapse' : '&#x25BC; Expand';
+      });
+
+      el.btnClearLog.addEventListener('click', () => {
+        el.serialBox.innerHTML = '';
+        logSerial('Serial Monitor cleared.', 'sl-info');
+      });
+
+      // Fullscreen (Cross-Platform with iPad/Safari Kiosk Fallback)
+      el.btnFs.addEventListener('click', () => {
+        const docEl = document.documentElement;
+        const isFs = Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+          if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          document.body.classList.remove('kiosk-mode');
+          el.fsLabel.textContent = 'Fullscreen';
+        } else {
+          if (docEl.requestFullscreen) {
+            docEl.requestFullscreen().then(() => {
+              el.fsLabel.textContent = 'Exit Full';
+            }).catch(() => {
+              const km = document.body.classList.toggle('kiosk-mode');
+              el.fsLabel.textContent = km ? 'Exit Kiosk' : 'Fullscreen';
+            });
+          } else if (docEl.webkitRequestFullscreen) {
+            try {
+              docEl.webkitRequestFullscreen();
+              el.fsLabel.textContent = 'Exit Full';
+            } catch (e) {
+              const km = document.body.classList.toggle('kiosk-mode');
+              el.fsLabel.textContent = km ? 'Exit Kiosk' : 'Fullscreen';
+            }
+          } else {
+            const km = document.body.classList.toggle('kiosk-mode');
+            el.fsLabel.textContent = km ? 'Exit Kiosk' : 'Fullscreen';
+            showToast(km ? 'Booth Kiosk Mode enabled.' : 'Booth Kiosk Mode exited.');
+          }
+        }
+      });
+
+      document.addEventListener('fullscreenchange', () => {
+        el.fsLabel.textContent = document.fullscreenElement ? 'Exit Full' : 'Fullscreen';
+      });
+
+      /* =======================================================================
+         10. TAB 2: VIRTUAL ION BENCH & QUANTITATIVE TABLE
+         ======================================================================= */
+      let ionMode = 'actual'; // 'actual' or 'positive'
+      const testedTubes = {};
+
+      function renderIonBench() {
+        const grid = $('tube-grid');
+        grid.innerHTML = '';
+        ION_TESTS.forEach((t) => {
+          const tested = Boolean(testedTubes[t.id]);
+          const isPos = tested && ionMode === 'positive';
+          const isNeg = tested && ionMode === 'actual';
+          const card = document.createElement('div');
+          card.className = 'tube-card' + (isNeg ? ' neg' : '') + (isPos ? ' pos' : '');
+
+          const liqFill = isPos ? (t.id === 'fe' ? '#bbf7d0' : '#e2e8f0') : '#e0f2fe';
+          const pptOpacity = isPos ? '0.96' : '0';
+          const resHtml = !tested
+            ? 'Ready: Tap button to add ' + t.reag
+            : (isPos
+                ? '<strong style="color:#b45309">Positive Control:</strong> ' + t.pptName + ' formed'
+                : '<strong style="color:#047857">N/A (Clear):</strong> No precipitate detected');
+
+          card.innerHTML = `
+            <div class="tube-name">${t.ion} (${t.sym})</div>
+            <div class="tube-reag">Reagent: ${t.reag}</div>
+            <svg class="tube-svg" viewBox="0 0 80 128" aria-label="${t.ion} Test Tube">
+              <path d="M35 6 L45 6 L42 22 L38 22 Z" fill="#94a3b8" />
+              <circle cx="40" cy="30" r="3" fill="#2563eb" opacity="${tested ? '0' : '0.8'}" />
+              <path d="M24 34 L56 34 L56 102 C56 112 49 118 40 118 C31 118 24 112 24 102 Z" fill="#fff" stroke="#475569" stroke-width="2.2" />
+              <path d="M26 62 L54 62 L54 102 C54 110 48 116 40 116 C32 116 26 110 26 102 Z" fill="${liqFill}" />
+              <g opacity="${pptOpacity}">
+                <ellipse cx="40" cy="109" rx="12" ry="6" fill="${t.pptColor}" stroke="#64748b" stroke-width="0.8" />
+                <circle cx="34" cy="96" r="2.6" fill="${t.pptColor}" stroke="#94a3b8" stroke-width="0.6" />
+                <circle cx="44" cy="92" r="2.8" fill="${t.pptColor}" stroke="#94a3b8" stroke-width="0.6" />
+                <circle cx="40" cy="84" r="2.2" fill="${t.pptColor}" stroke="#94a3b8" stroke-width="0.6" />
+              </g>
+              <rect x="21" y="31" width="38" height="4" rx="2" fill="#cbd5e1" stroke="#475569" stroke-width="1.2" />
+            </svg>
+            <button class="btn ${tested ? '' : 'btn-blue'}" type="button" data-tube="${t.id}" style="min-height:36px;width:100%;font-size:0.72rem;padding:0 6px;">
+              ${tested ? 'Tested ✓' : 'Drop Reagent'}
+            </button>
+            <div class="tube-res">${resHtml}</div>
+            <div class="tube-eq">${t.eq}</div>
+          `;
+          grid.appendChild(card);
+        });
+
+        grid.querySelectorAll('button[data-tube]').forEach((b) => {
+          b.addEventListener('click', () => {
+            testedTubes[b.dataset.tube] = true;
+            renderIonBench();
+          });
+        });
+      }
+
+      document.querySelectorAll('.seg-btn[data-ionmode]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          ionMode = btn.dataset.ionmode;
+          document.querySelectorAll('.seg-btn[data-ionmode]').forEach((b) => b.classList.toggle('active', b === btn));
+          const pill = $('ion-mode-pill');
+          if (ionMode === 'actual') {
+            pill.className = 'badge b-green';
+            pill.textContent = 'Mode: Actual AC Condensate (Zero Metal Ions Detected)';
+          } else {
+            pill.className = 'badge b-amber';
+            pill.textContent = 'Mode: Positive Control Reference (Shows Precipitate Color)';
+          }
+          renderIonBench();
+        });
+      });
+
+      $('btn-test-all').addEventListener('click', () => {
+        ION_TESTS.forEach((t) => { testedTubes[t.id] = true; });
+        renderIonBench();
+      });
+
+      $('btn-reset-tubes').addEventListener('click', () => {
+        Object.keys(testedTubes).forEach((k) => delete testedTubes[k]);
+        renderIonBench();
+      });
+
+      function renderQuantTable(cat) {
+        const tbody = $('quant-tbody');
+        tbody.innerHTML = '';
+        const labels = { physical: ['Physical', 'b-blue'], chemical: ['Chemical', 'b-violet'], micro: ['Microbio', 'b-cyan'] };
+        QUANT_DATA.filter((r) => cat === 'all' || r.cat === cat).forEach((r) => {
+          const [lbl, cls] = labels[r.cat];
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong>${r.p}</strong></td>
+            <td><span class="badge ${cls}">${lbl}</span></td>
+            <td class="q-val">${r.res}</td>
+            <td>${r.lim}</td>
+            <td class="q-meth">${r.m}</td>
+            <td><span class="badge b-green">PASS</span></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      document.querySelectorAll('#lab-filters .f-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#lab-filters .f-btn').forEach((b) => b.classList.toggle('active', b === btn));
+          renderQuantTable(btn.dataset.cat);
+        });
+      });
+
+      /* =======================================================================
+         11. TAB 3: YIELD & GLOBAL IMPACT ESTIMATOR + SVG BAR CHART
+         ======================================================================= */
+      const slUnits = $('sl-units');
+      const slHours = $('sl-hours');
+      const selSeason = $('sel-season');
+
+      function updateYield() {
+        const units = Number(slUnits.value);
+        const hours = Number(slHours.value);
+        const base7h = Number(selSeason.value);
+        const seasonName = selSeason.options[selSeason.selectedIndex].text.split('—')[0].trim();
+
+        $('val-units').textContent = units + (units === 1 ? ' unit' : ' units');
+        $('val-hours').textContent = hours + ' h/day';
+
+        const dailyL = units * base7h * (hours / 7);
+        const cycles = dailyL / CYCLE_VOL_L;
+        const bottles = dailyL / RES_MAX_L;
+        const people = Math.floor(dailyL / 2.60);
+
+        $('y-daily').textContent = dailyL.toLocaleString('en-US', { maximumFractionDigits: 1 }) + ' L/day';
+        $('y-daily-sub').textContent = `${units} AC Unit${units > 1 ? 's' : ''} • ${hours} h/day • ${seasonName}`;
+        $('y-cycles').textContent = cycles.toLocaleString('en-US', { maximumFractionDigits: 1 }) + ' cycles';
+        $('y-bottles').textContent = bottles.toLocaleString('en-US', { maximumFractionDigits: 1 }) + ' bottles';
+        $('y-people').textContent = people.toLocaleString('en-US') + ' people';
+        $('chart-badge').textContent = `${units} Unit${units > 1 ? 's' : ''} • ${hours} h/day`;
+
+        renderYieldChart(units, hours, base7h);
+      }
+
+      function renderYieldChart(units, hours, selectedBase) {
+        const svg = $('yield-chart');
+        const months = [
+          { name: 'June',     base: 51.24, col: '#2563eb' },
+          { name: 'July',     base: 51.56, col: '#0891b2' },
+          { name: 'August',   base: 55.65, col: '#059669' },
+          { name: 'December', base: 44.53, col: '#7c3aed' }
+        ];
+        const vals = months.map((m) => units * m.base * (hours / 7));
+        const maxVal = Math.max(...vals, 1) * 1.16;
+
+        let html = '';
+        // Grid lines
+        for (let i = 0; i <= 4; i++) {
+          const y = 250 - i * 52;
+          const v = (maxVal / 4) * i;
+          html += `<line x1="68" y1="${y}" x2="656" y2="${y}" stroke="#e2e8f0" stroke-width="1.2" />`;
+          html += `<text x="60" y="${y + 4}" text-anchor="end" font-family="ui-monospace, monospace" font-size="10.5" font-weight="700" fill="#64748b">${Math.round(v).toLocaleString()}</text>`;
+        }
+        html += `<line x1="68" y1="250" x2="656" y2="250" stroke="#94a3b8" stroke-width="1.8" />`;
+        html += `<text x="16" y="148" text-anchor="middle" font-size="11" font-weight="800" fill="#475569" transform="rotate(-90 16 148)">Liters / Day</text>`;
+
+        months.forEach((m, idx) => {
+          const val = vals[idx];
+          const barH = Math.max(8, (val / maxVal) * 208);
+          const x = 104 + idx * 142;
+          const y = 250 - barH;
+          const isSel = Math.abs(m.base - selectedBase) < 0.01;
+          const cyc = (val / CYCLE_VOL_L).toFixed(0);
+          html += `
+            <rect x="${x}" y="${y.toFixed(1)}" width="84" height="${barH.toFixed(1)}" rx="8" fill="${m.col}" opacity="${isSel ? '1' : '0.68'}" stroke="${isSel ? '#0f172a' : 'none'}" stroke-width="2" />
+            <text x="${x + 42}" y="${(y - 8).toFixed(1)}" text-anchor="middle" font-family="ui-monospace, monospace" font-size="12" font-weight="900" fill="#0f172a">${val.toLocaleString('en-US', { maximumFractionDigits: 1 })} L</text>
+            <text x="${x + 42}" y="269" text-anchor="middle" font-size="12.5" font-weight="900" fill="${isSel ? '#0f172a' : '#475569'}">${m.name}</text>
+            <text x="${x + 42}" y="285" text-anchor="middle" font-size="10.5" font-weight="700" fill="#64748b">${Number(cyc).toLocaleString()} cyc/day</text>
+          `;
+        });
+        svg.innerHTML = html;
+      }
+
+      slUnits.addEventListener('input', updateYield);
+      slHours.addEventListener('input', updateYield);
+      selSeason.addEventListener('change', updateYield);
+      document.querySelectorAll('button[data-units]').forEach((b) => {
+        b.addEventListener('click', () => {
+          slUnits.value = b.dataset.units;
+          updateYield();
+        });
+      });
+
+      /* =======================================================================
+         12. INITIAL BOOTSTRAP
+         ======================================================================= */
+      initParticles();
+      applyPreset('sgs');
+      renderIonBench();
+      renderQuantTable('all');
+      updateYield();
+      enterState('IDLE');
+      logSerial('AC-WAIS SIIF 2026 Simulator initialized (1.30 L/cycle -> 2.60 L Reservoir -> Auto-Bottle).', 'sl-ok');
+      requestAnimationFrame(loop);
+    })();
+  </script>
+</body>
+</html>
